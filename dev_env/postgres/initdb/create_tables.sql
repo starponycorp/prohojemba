@@ -1,47 +1,45 @@
 create table accounts (
     id serial primary key,
-    email varchar(64) unique,
-    encodedPassword varchar(128),
-    isLocked boolean default false
+    email varchar(64) unique not null,
+    encodedPassword varchar(128) not null,
+    isLocked boolean not null default false
 );
 create index accountEmail on accounts using hash(email);
 
 create table profiles (
-    accountId integer references accounts on delete cascade,
-    username varchar(64) unique,
+    account integer references accounts on delete cascade,
+    username varchar(64) unique not null,
     avatar varchar(128)
 );
 
 create table permissions (
-    id smallserial primary key,
-    systemName varchar(32) unique,
-    viewName varchar(64)
+    systemName varchar(32) primary key,
+    viewName varchar(64) unique not null
 );
 
 create table accountPermissions (
-    accountId integer references accounts on delete cascade,
-    permissionId smallint references permissions on delete cascade,
-    primary key (accountId, permissionId)
+    account integer references accounts on delete cascade,
+    permission varchar(32) references permissions on delete cascade,
+    primary key (account, permission)
 );
 
 create table types (
-    id smallserial primary key,
-    systemName varchar(32) unique,
-    viewName varchar(32)
+    systemName varchar(32) primary key,
+    viewName varchar(32) not null unique
 );
 
 create table titles (
     id serial primary key,
-    name varchar(128),
+    name varchar(128) not null,
     cover varchar(128),
-    typeId smallint references types on delete set null
+    type varchar(32) references types on delete set null on update cascade
 );
 
 create table accountTitles (
-    accountId integer references accounts on delete cascade,
-    titleId integer references titles on delete cascade,
-    state varchar(16),
-    primary key (accountId, titleId)
+    account integer references accounts on delete cascade,
+    title integer references titles on delete cascade,
+    state varchar(16) not null,
+    primary key (account, title)
 );
 
 
