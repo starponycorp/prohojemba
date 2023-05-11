@@ -1,5 +1,13 @@
 HELP.md
 target/
+dev_env/postgres/pgdata
+dev_env/nginx/logs
+dev_env/redis/data
+dev_env/solr/
+!dev_env/solr/security.json
+dev_env/uploader/logs
+dev_env/media
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
