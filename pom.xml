@@ -42,15 +42,11 @@
 			<artifactId>jedis</artifactId>
 			<version>4.3.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
 		<dependency>
-			<groupId>co.elastic.clients</groupId>
-			<artifactId>elasticsearch-java</artifactId>
-			<version>8.7.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>9.2.1</version>
 		</dependency>
 
 		<dependency>
