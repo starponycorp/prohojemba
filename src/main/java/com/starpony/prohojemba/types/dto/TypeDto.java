@@ -2,15 +2,15 @@ package com.starpony.prohojemba.types.dto;
 
 
 public class TypeDto {
-    private String systemName;
+    private int id;
     private String viewName;
 
-    public String getSystemName() {
-        return systemName;
+    public int getId() {
+        return id;
     }
 
-    public void setSystemName(String systemName) {
-        this.systemName = systemName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getViewName() {

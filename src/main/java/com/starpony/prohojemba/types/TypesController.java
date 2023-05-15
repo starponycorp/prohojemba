@@ -20,16 +20,15 @@ public class TypesController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void createType(@RequestBody TypeDto typeDto) {
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public void updateType(@PathVariable int id, @RequestBody TypeDto typeDto) {
 
     }
 
-    @RequestMapping(value = "/{systemName}", method = RequestMethod.PUT)
-    public void updateType(@PathVariable String systemName, @RequestBody TypeDto typeDto) {
-
-    }
-
-    @RequestMapping(value = "/{systemName}", method = RequestMethod.DELETE)
-    public void deleteType(@PathVariable String systemName) {
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteType(@PathVariable int id) {
+        
     }
 }
