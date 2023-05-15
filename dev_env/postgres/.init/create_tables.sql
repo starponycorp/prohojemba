@@ -13,18 +13,19 @@ create table profiles (
 );
 
 create table permissions (
-    systemName varchar(32) primary key,
+    id serial primary key,
+    systemName varchar(32) unique not null,
     viewName varchar(64) unique not null
 );
 
 create table accountPermissions (
     account integer references accounts on delete cascade,
-    permission varchar(32) references permissions on delete cascade,
+    permission integer references permissions on delete cascade,
     primary key (account, permission)
 );
 
 create table types (
-    systemName varchar(32) primary key,
+    id serial primary key,
     viewName varchar(32) not null unique
 );
 
@@ -32,7 +33,7 @@ create table titles (
     id serial primary key,
     name varchar(128) not null,
     cover varchar(128),
-    type varchar(32) references types on delete set null on update cascade
+    type integer references types on delete set null on update cascade
 );
 
 create table accountTitles (
