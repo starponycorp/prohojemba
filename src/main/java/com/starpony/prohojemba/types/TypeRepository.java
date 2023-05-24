@@ -7,11 +7,9 @@ import java.util.Optional;
 public interface TypeRepository {
     List<Type> findAll();
 
-    Optional<Type> getById(int id);
+    void create(Type type);
 
-    Type create(Type type);
+    void update(Type type);
 
-    Type update(Type type);
-
-    void delete(int id);
+    void delete(Type type);
 }

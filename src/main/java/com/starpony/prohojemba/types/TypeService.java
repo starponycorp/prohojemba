@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.types;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,19 +8,26 @@ import java.util.List;
 
 @Service
 public class TypeService {
+    private final TypeRepository typeRepository;
+
+    @Autowired
+    public TypeService(TypeRepository typeRepository) {
+        this.typeRepository = typeRepository;
+    }
+
     public List<Type> getAll() {
-        return null;
+        return typeRepository.findAll();
     }
 
-    public Type create(Type type) {
-        return null;
+    public void create(Type type) {
+        typeRepository.create(type);
     }
 
-    public Type update(Type type) {
-        return null;
+    public void update(Type type) {
+        typeRepository.update(type);
     }
 
-    public void delete(int id) {
-
+    public void delete(Type type) {
+        typeRepository.delete(type);
     }
 }

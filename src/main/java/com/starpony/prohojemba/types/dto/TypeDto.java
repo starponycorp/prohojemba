@@ -1,9 +1,21 @@
 package com.starpony.prohojemba.types.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.starpony.prohojemba.types.Type;
+
 
 public class TypeDto {
     private int id;
+
     private String viewName;
+
+    public TypeDto() {};
+
+    public TypeDto(Type type) {
+        this.id = type.getId();
+        this.viewName = type.getViewName();
+    }
 
     public int getId() {
         return id;
@@ -19,5 +31,9 @@ public class TypeDto {
 
     public void setViewName(String viewName) {
         this.viewName = viewName;
+    }
+
+    public Type toType() {
+        return new Type(this.viewName);
     }
 }

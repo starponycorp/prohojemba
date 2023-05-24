@@ -11,11 +11,12 @@ public interface TypeMapper {
     List<Type> findAll();
 
     @Insert("insert into types(viewName) values (#{viewName})")
-    void create(String viewName);
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void create(Type type);
 
     @Update("update types set viewName=#{viewName} where id=#{id}")
-    void update(int id, String viewName);
+    void update(Type type);
 
     @Delete("delete from types where id=#{id}")
-    void delete(int id);
+    void delete(Type type);
 }

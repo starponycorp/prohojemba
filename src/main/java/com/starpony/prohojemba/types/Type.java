@@ -4,6 +4,10 @@ public class Type {
     private int id;
     private String viewName;
 
+    public Type(String viewName) {
+        this.viewName = viewName;
+    }
+
     public int getId() {
         return id;
     }
