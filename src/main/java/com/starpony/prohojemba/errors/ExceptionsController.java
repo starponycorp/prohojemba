@@ -3,6 +3,7 @@ package com.starpony.prohojemba.errors;
 import com.starpony.prohojemba.errors.exceptions.ItemAlreadyExistsException;
 import com.starpony.prohojemba.errors.exceptions.ItemNotFoundException;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,8 +18,14 @@ public class ExceptionsController {
         return new ErrorDto(ex.getMessage());
     }
 
+    @ExceptionHandler(value = {ConstraintViolationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDto handleDtoValidationError(ConstraintViolationException ex) {
+        return new ErrorDto(ex.getMessage());
+    }
+
     @ExceptionHandler(value = {ItemAlreadyExistsException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
     public ErrorDto handleItemAlreadyExists(ItemAlreadyExistsException ex) {
         return new ErrorDto(ex.getMessage());
     }

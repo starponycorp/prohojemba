@@ -27,7 +27,7 @@ public class TypeDbRepository implements TypeRepository{
         try {
             typeMapper.create(type);
         } catch (DuplicateKeyException ex) {
-            throw new TypeAlreadyExistsException();
+            exists(type);
         }
     }
 
@@ -39,5 +39,9 @@ public class TypeDbRepository implements TypeRepository{
     @Override
     public void delete(Type type) {
         typeMapper.delete(type);
+    }
+
+    private void exists(Type type) {
+        throw new TypeAlreadyExistsException(String.format("Type with viewName=%s already exists", type.getViewName()));
     }
 }

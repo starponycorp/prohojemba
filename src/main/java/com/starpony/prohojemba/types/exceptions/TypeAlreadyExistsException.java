@@ -4,7 +4,7 @@ import com.starpony.prohojemba.errors.exceptions.ItemAlreadyExistsException;
 
 
 public class TypeAlreadyExistsException extends ItemAlreadyExistsException {
-    public TypeAlreadyExistsException() {
-        super("Type already exists");
+    public TypeAlreadyExistsException(String message) {
+        super(message);
     }
 }
