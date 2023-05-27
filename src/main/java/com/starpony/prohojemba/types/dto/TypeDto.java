@@ -4,10 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.starpony.prohojemba.types.Type;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
 
 public class TypeDto {
     private int id;
 
+    @NotBlank(message = "Viewname is mandatory")
     private String viewName;
 
     public TypeDto() {};

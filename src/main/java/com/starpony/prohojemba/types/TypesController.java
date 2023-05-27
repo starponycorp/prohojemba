@@ -3,6 +3,7 @@ package com.starpony.prohojemba.types;
 import com.starpony.prohojemba.types.dto.TypeDto;
 import com.starpony.prohojemba.types.dto.TypeListDto;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class TypesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public TypeDto createType(@RequestBody TypeDto typeDto) {
+    public TypeDto createType(@Valid @RequestBody TypeDto typeDto) {
         Type type = typeDto.toType();
         typeService.create(type);
         return new TypeDto(type);
