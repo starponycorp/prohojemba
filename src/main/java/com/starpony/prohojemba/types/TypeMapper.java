@@ -18,5 +18,5 @@ public interface TypeMapper {
     void update(Type type);
 
     @Delete("delete from types where id=#{id}")
-    void delete(Type type);
+    void delete(int id);
 }

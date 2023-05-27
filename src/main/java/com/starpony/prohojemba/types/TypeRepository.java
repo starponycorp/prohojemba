@@ -11,5 +11,5 @@ public interface TypeRepository {
 
     void update(Type type);
 
-    void delete(Type type);
+    void delete(int id);
 }

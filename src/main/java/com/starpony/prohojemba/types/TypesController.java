@@ -25,19 +25,22 @@ public class TypesController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public TypeDto createType(@Valid @RequestBody TypeDto typeDto) {
+    public TypeDto createType(@RequestBody TypeDto typeDto) {
         Type type = typeDto.toType();
         typeService.create(type);
         return new TypeDto(type);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void updateType(@PathVariable int id, @RequestBody TypeDto typeDto) {
-
+    public TypeDto updateType(@PathVariable int id, @RequestBody TypeDto typeDto) {
+        Type type = typeDto.toType();
+        type.setId(id);
+        typeService.update(type);
+        return new TypeDto(type);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteType(@PathVariable int id) {
-        
+        typeService.delete(id);
     }
 }

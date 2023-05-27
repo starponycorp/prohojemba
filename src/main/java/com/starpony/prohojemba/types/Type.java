@@ -1,7 +1,10 @@
 package com.starpony.prohojemba.types;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Type {
     private int id;
+    @NotBlank(message = "Viewname is mandatory")
     private String viewName;
 
     public Type(String viewName) {

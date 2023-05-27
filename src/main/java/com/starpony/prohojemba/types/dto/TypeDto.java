@@ -10,8 +10,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class TypeDto {
     private int id;
-
-    @NotBlank(message = "Viewname is mandatory")
     private String viewName;
 
     public TypeDto() {};

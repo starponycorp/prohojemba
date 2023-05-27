@@ -37,8 +37,8 @@ public class TypeDbRepository implements TypeRepository{
     }
 
     @Override
-    public void delete(Type type) {
-        typeMapper.delete(type);
+    public void delete(int id) {
+        typeMapper.delete(id);
     }
 
     private void exists(Type type) {

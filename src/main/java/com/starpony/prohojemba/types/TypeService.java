@@ -1,11 +1,14 @@
 package com.starpony.prohojemba.types;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 
+@Validated
 @Service
 public class TypeService {
     private final TypeRepository typeRepository;
@@ -19,15 +22,15 @@ public class TypeService {
         return typeRepository.findAll();
     }
 
-    public void create(Type type) {
+    public void create(@Valid Type type) {
         typeRepository.create(type);
     }
 
-    public void update(Type type) {
+    public void update(@Valid Type type) {
         typeRepository.update(type);
     }
 
-    public void delete(Type type) {
-        typeRepository.delete(type);
+    public void delete(int id) {
+        typeRepository.delete(id);
     }
 }
