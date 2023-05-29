@@ -19,29 +19,32 @@ public class TypeDbRepository implements TypeRepository{
 
     @Override
     public List<Type> findAll() {
-        return typeMapper.findAll();
+        return typeMapper.selectAll();
     }
 
     @Override
     public void create(Type type) {
-        try {
-            typeMapper.create(type);
-        } catch (DuplicateKeyException ex) {
-            exists(type);
-        }
+        // Проверка уникальности viewName
+        if (typeMapper.selectByViewName(type.getViewName()) != null)
+            throw new TypeAlreadyExistsException(
+                    String.format("Type with viewName=%s already exists", type.getViewName()));
+
+        typeMapper.create(type);
     }
 
     @Override
     public void update(Type type) {
+        // Проверка уникальности viewName
+        Type typeForUniqueCheck = typeMapper.selectByViewName(type.getViewName());
+        if (typeForUniqueCheck != null && typeForUniqueCheck.getId() != type.getId())
+            throw new TypeAlreadyExistsException(
+                    String.format("Type with viewName=%s already exists", type.getViewName()));
+
         typeMapper.update(type);
     }
 
     @Override
     public void delete(int id) {
         typeMapper.delete(id);
-    }
-
-    private void exists(Type type) {
-        throw new TypeAlreadyExistsException(String.format("Type with viewName=%s already exists", type.getViewName()));
     }
 }

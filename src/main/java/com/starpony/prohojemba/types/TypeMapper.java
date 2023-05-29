@@ -1,14 +1,18 @@
 package com.starpony.prohojemba.types;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.jdbc.core.SqlProvider;
 
 import java.util.List;
 
 
 @Mapper
-public interface TypeMapper {
+public interface TypeMapper{
     @Select("select * from types")
-    List<Type> findAll();
+    List<Type> selectAll();
+
+    @Select("select * from types where viewName=#{viewName}")
+    Type selectByViewName(String viewName);
 
     @Insert("insert into types(viewName) values (#{viewName})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
