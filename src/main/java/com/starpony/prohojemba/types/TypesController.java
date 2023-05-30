@@ -1,9 +1,9 @@
 package com.starpony.prohojemba.types;
 
 import com.starpony.prohojemba.types.dto.TypeDto;
+import com.starpony.prohojemba.types.dto.TypeDtoMapper;
 import com.starpony.prohojemba.types.dto.TypeListDto;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +20,22 @@ public class TypesController {
 
     @RequestMapping(method = RequestMethod.GET)
     public TypeListDto getAllTypes() {
-
-        return null;
+        return TypeDtoMapper.mapToTypeListDto(typeService.getAll());
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public TypeDto createType(@RequestBody TypeDto typeDto) {
-        Type type = typeDto.toType();
+        Type type = TypeDtoMapper.mapToType(typeDto);
         typeService.create(type);
-        return new TypeDto(type);
+        return TypeDtoMapper.mapToTypeDto(type);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public TypeDto updateType(@PathVariable int id, @RequestBody TypeDto typeDto) {
-        Type type = typeDto.toType();
+        Type type = TypeDtoMapper.mapToType(typeDto);
         type.setId(id);
         typeService.update(type);
-        return new TypeDto(type);
+        return TypeDtoMapper.mapToTypeDto(type);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -7,10 +7,6 @@ public class Type {
     @NotBlank(message = "Viewname is mandatory")
     private String viewName;
 
-    public Type(String viewName) {
-        this.viewName = viewName;
-    }
-
     public int getId() {
         return id;
     }
