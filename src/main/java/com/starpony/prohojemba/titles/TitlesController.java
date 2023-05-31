@@ -4,12 +4,20 @@ import com.starpony.prohojemba.titles.dto.EditTitleDto;
 import com.starpony.prohojemba.titles.dto.TitleDto;
 import com.starpony.prohojemba.titles.dto.TitleListDto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping(value = "/titles")
 public class TitlesController {
+    private final TitleService titleService;
+
+    @Autowired
+    public TitlesController(TitleService titleService) {
+        this.titleService = titleService;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public TitleListDto getTitles(QueryParams queryParams) {
 
@@ -32,6 +40,5 @@ public class TitlesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteTitle(@PathVariable int id) {
-        // Удаление тайтла
     }
 }
