@@ -6,7 +6,7 @@ import com.starpony.prohojemba.types.dto.TypeDto;
 public class EditTitleDto {
     private String name;
     private String cover;
-    private TypeDto type;
+    private int type;
 
     public String getName() {
         return name;
@@ -24,11 +24,11 @@ public class EditTitleDto {
         this.cover = cover;
     }
 
-    public TypeDto getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(TypeDto type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

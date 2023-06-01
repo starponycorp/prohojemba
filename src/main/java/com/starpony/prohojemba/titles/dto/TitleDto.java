@@ -8,6 +8,7 @@ public class TitleDto {
     private String name;
     private String cover;
     private TypeDto type;
+    private String progress;
 
     public int getId() {
         return id;
@@ -39,5 +40,13 @@ public class TitleDto {
 
     public void setType(TypeDto type) {
         this.type = type;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 }

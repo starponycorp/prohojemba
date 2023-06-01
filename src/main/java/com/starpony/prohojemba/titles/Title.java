@@ -10,6 +10,7 @@ public class Title {
     private String name;
     private String cover;
     private Type type;
+    private String progress;
 
     public int getId() {
         return id;
@@ -41,5 +42,13 @@ public class Title {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 }
