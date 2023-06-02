@@ -11,8 +11,11 @@ public interface TypeMapper{
     @Select("select * from types")
     List<Type> selectAll();
 
+    @Select("select * from types where id=#{id}")
+    Type selectOne(int id);
+
     @Select("select * from types where viewName=#{viewName}")
-    Type selectByViewName(String viewName);
+    Type selectOne(String viewName);
 
     @Insert("insert into types(viewName) values (#{viewName})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

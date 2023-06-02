@@ -6,6 +6,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -21,6 +22,17 @@ public class TypeDbRepository implements TypeRepository{
     public List<Type> findAll() {
         return typeMapper.selectAll();
     }
+
+    @Override
+    public Optional<Type> findOne(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Type> findOne(String viewName) {
+        return Optional.empty();
+    }
+
 
     @Override
     public void create(Type type) {
