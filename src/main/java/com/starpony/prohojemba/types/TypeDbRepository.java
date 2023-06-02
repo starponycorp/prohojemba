@@ -25,14 +25,8 @@ public class TypeDbRepository implements TypeRepository{
 
     @Override
     public Optional<Type> findOne(int id) {
-        return Optional.empty();
+        return Optional.ofNullable(typeMapper.selectById(id));
     }
-
-    @Override
-    public Optional<Type> findOne(String viewName) {
-        return Optional.empty();
-    }
-
 
     @Override
     public void create(Type type) {

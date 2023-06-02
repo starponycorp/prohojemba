@@ -4,7 +4,7 @@ import com.starpony.prohojemba.errors.exceptions.ItemNotFoundException;
 
 
 public class TypeNotFoundException extends ItemNotFoundException {
-    public TypeNotFoundException(int id) {
-        super(String.format("Type with id=%d not found", id));
+    public TypeNotFoundException(String message) {
+        super(message);
     }
 }

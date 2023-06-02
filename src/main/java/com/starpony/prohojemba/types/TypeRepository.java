@@ -9,8 +9,6 @@ public interface TypeRepository {
 
     Optional<Type> findOne(int id);
 
-    Optional<Type> findOne(String viewName);
-
     void create(Type type);
 
     void update(Type type);
