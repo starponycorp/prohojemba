@@ -26,11 +26,11 @@ public class TitlesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TitleDto getTitle(@PathVariable int id) {
-        return TitleDtoMapper.mapToTitleDto(titleService.get(id));
+        return TitleDtoMapper.mapToTitleDto(titleService.getOne(id));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public TitleDto createTitle(@PathVariable int id, @RequestBody EditTitleDto titleDto) {
+    @RequestMapping(method = RequestMethod.POST)
+    public TitleDto createTitle(@RequestBody EditTitleDto titleDto) {
         Title title = TitleDtoMapper.mapToTitle(titleDto);
         titleService.create(title);
         return TitleDtoMapper.mapToTitleDto(title);
