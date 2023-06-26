@@ -3,8 +3,8 @@ package com.starpony.prohojemba.titles;
 public class QueryParams {
     private int limit = 10;
     private int offset = 0;
-    private int type;
-    private String search;
+    private int type; // Фильтрация по типу тайтла
+    private String search; // Поиск по названию тайтла
 
     public int getLimit() {
         return limit;
