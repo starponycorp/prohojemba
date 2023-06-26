@@ -9,8 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import java.util.List;
 
 
-@Validated
 @Service
+@Validated
 public class TypeService {
     private final TypeRepository typeRepository;
 

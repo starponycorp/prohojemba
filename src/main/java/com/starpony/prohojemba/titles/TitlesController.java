@@ -5,6 +5,7 @@ import com.starpony.prohojemba.titles.dto.TitleDto;
 import com.starpony.prohojemba.titles.dto.TitleDtoMapper;
 import com.starpony.prohojemba.titles.dto.TitleListDto;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class TitlesController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public TitleListDto getTitles(QueryParams queryParams) {
+    public TitleListDto getTitles(@Valid QueryParams queryParams) {
         return TitleDtoMapper.mapToTitleListDto(titleService.getAll(queryParams));
     }
 
