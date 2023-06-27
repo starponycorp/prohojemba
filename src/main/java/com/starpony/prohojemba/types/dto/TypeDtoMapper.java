@@ -23,7 +23,8 @@ public class TypeDtoMapper {
 
     public static TypeListDto mapToTypeListDto(List<Type> types) {
         TypeListDto typeListDto = new TypeListDto();
-        typeListDto.setItems(types.stream().map(TypeDtoMapper::mapToTypeDto).collect(Collectors.toList()));
+        typeListDto.setItems(types.stream().map(
+                TypeDtoMapper::mapToTypeDto).collect(Collectors.toList()));
         return typeListDto;
     }
 }

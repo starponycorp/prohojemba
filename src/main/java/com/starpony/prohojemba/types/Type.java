@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class Type {
     private int id;
-    @NotBlank(message = "Viewname is mandatory")
+    @NotBlank(message = "viewname is mandatory")
     private String viewName;
 
     public int getId() {
