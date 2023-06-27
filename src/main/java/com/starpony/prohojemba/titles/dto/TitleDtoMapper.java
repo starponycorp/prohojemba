@@ -23,7 +23,7 @@ public class TitleDtoMapper {
 
     public static TitleDto mapToTitleDto(Title title) {
         TitleDto titleDto = new TitleDto();
-        titleDto.setId(titleDto.getId());
+        titleDto.setId(title.getId());
         titleDto.setName(title.getName());
         titleDto.setCover(title.getCover());
         titleDto.setType(TypeDtoMapper.mapToTypeDto(title.getType()));
