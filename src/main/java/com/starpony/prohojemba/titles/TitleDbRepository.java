@@ -67,6 +67,7 @@ public class TitleDbRepository implements TitleRepository{
         titleMapper.delete(id);
     }
 
+    // Описание таблицы Titles, для генерации динамического sql
     private static final class TitlesTable extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);
         public final SqlColumn<String> name = column("name", JDBCType.VARCHAR);
