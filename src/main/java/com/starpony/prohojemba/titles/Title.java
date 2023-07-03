@@ -1,8 +1,6 @@
 package com.starpony.prohojemba.titles;
 
 import com.starpony.prohojemba.types.Type;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 
 
 public class Title {
