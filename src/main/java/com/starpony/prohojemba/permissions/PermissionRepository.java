@@ -1,8 +1,17 @@
 package com.starpony.prohojemba.permissions;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
 
 
-@Repository
 public interface PermissionRepository {
+    List<Permission> findAll();
+
+    Optional<Permission> findOne(int id);
+
+    void create(Permission permission);
+
+    void update(Permission permission);
+
+    void delete(int id);
 }
