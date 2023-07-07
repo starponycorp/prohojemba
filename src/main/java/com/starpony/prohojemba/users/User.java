@@ -1,12 +1,20 @@
 package com.starpony.prohojemba.users;
 
+import com.starpony.prohojemba.permissions.Permission;
 
-public class Account {
+import java.util.List;
+
+
+public class User {
     private int id;
     private String email;
     private String encodedPassword;
     private boolean isLocked;
-    private Profile profile;
+
+    private String username;
+    private String avatar;
+
+    private List<Permission> permissions;
 
     public int getId() {
         return id;
@@ -40,11 +48,27 @@ public class Account {
         isLocked = locked;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getUsername() {
+        return username;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 }
