@@ -8,6 +8,9 @@ public interface UserMapper {
     @Select("select * from accounts left join profiles on profiles.account = accounts.id where accounts.id=#{id}")
     User selectById(int id);
 
+    @Select("select * from accounts left join profiles on profiles.account = accounts.id where profiles.username=#{username}")
+    User selectByUsername(String username);
+
     @Insert("insert into accounts(email, encodedPassword, isLocked) values (#{email}, #{encodedPassword}, #{isLocked})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void createAccount(User user);
