@@ -22,7 +22,7 @@ public class UserDbRepository implements UserRepository{
     }
 
     @Override
-    public void update(User user) {
+    public void updateProfile(User user) {
         User userForUniqueCheck = userMapper.selectByUsername(user.getUsername());
         if (userForUniqueCheck != null && userForUniqueCheck.getId() != user.getId())
             throw new UserAlreadyExistsException(
