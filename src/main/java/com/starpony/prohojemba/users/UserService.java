@@ -1,6 +1,7 @@
 package com.starpony.prohojemba.users;
 
 import com.starpony.prohojemba.users.dto.EditProfileDto;
+import com.starpony.prohojemba.users.dto.UserDtoMapper;
 import com.starpony.prohojemba.users.exceptions.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class UserService {
     }
 
     public User updateProfile(int id, @Valid EditProfileDto editProfileDto) {
-        return null;
+        User user = UserDtoMapper.mapToUser(editProfileDto);
+        user.setId(id);
+        userRepository.updateProfile(user);
+
+        return getOne(id);
     }
 }

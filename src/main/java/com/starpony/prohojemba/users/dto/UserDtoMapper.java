@@ -10,12 +10,11 @@ public class UserDtoMapper {
         return user;
     }
 
-    public CurrentUserDto mapToCurrentUserDto(User user) {
+    public static CurrentUserDto mapToCurrentUserDto(User user) {
         CurrentUserDto currentUserDto = new CurrentUserDto();
         currentUserDto.setUsername(user.getUsername());
         currentUserDto.setAvatar(user.getAvatar());
         currentUserDto.setEmail(user.getEmail());
         return currentUserDto;
-
     }
 }
