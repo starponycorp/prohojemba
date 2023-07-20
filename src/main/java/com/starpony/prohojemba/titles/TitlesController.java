@@ -1,9 +1,6 @@
 package com.starpony.prohojemba.titles;
 
-import com.starpony.prohojemba.titles.dto.EditTitleDto;
-import com.starpony.prohojemba.titles.dto.TitleDto;
-import com.starpony.prohojemba.titles.dto.TitleDtoMapper;
-import com.starpony.prohojemba.titles.dto.TitleListDto;
+import com.starpony.prohojemba.titles.dto.*;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,13 @@ public class TitlesController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TitleDto getTitle(@PathVariable int id) {
         return TitleDtoMapper.mapToTitleDto(titleService.getOne(id));
+    }
+
+    @RequestMapping(value = "/{titleId}/state")
+    public void updateTitleStateForUser(@PathVariable int titleId, @RequestParam(name = "value") String state) {
+        TitleStateForUser titleStateForUser = TitleStateForUser.valueOf(state.toUpperCase());
+        int currentUserId = 1;
+        titleService.updateStatusForUser(currentUserId, titleId, titleStateForUser);
     }
 
     @RequestMapping(method = RequestMethod.POST)

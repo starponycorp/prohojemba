@@ -1,7 +1,9 @@
 package com.starpony.prohojemba.titles;
 
 import com.starpony.prohojemba.titles.exceptions.TitleNotFoundException;
+import com.starpony.prohojemba.types.TypeRepository;
 import com.starpony.prohojemba.types.TypeService;
+import com.starpony.prohojemba.types.exceptions.TypeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -13,13 +15,15 @@ import java.util.List;
 @Validated
 public class TitleService {
     private final TitleRepository titleRepository;
+    private final TitleStateRepository titleStateRepository;
 
-    private final TypeService typeService;
+    private final TypeRepository typeRepository;
 
     @Autowired
-    public TitleService(TitleRepository titleRepository, TypeService typeService) {
+    public TitleService(TitleRepository titleRepository, TitleStateRepository titleStateRepository, TypeRepository typeRepository) {
         this.titleRepository = titleRepository;
-        this.typeService = typeService;
+        this.titleStateRepository = titleStateRepository;
+        this.typeRepository = typeRepository;
     }
 
     public List<Title> getAll(QueryParams queryParams) {
@@ -36,13 +40,19 @@ public class TitleService {
     }
 
     public void create(Title title) {
-        title.setType(typeService.getOne(title.getType().getId()));
+        title.setType(typeRepository.findOne(title.getType().getId()).orElseThrow(() ->
+                new TypeNotFoundException(String.format("Type with id=%s not found", title.getType().getId()))));
         titleRepository.create(title);
     }
 
     public void update(Title title) {
-        title.setType(typeService.getOne(title.getType().getId()));
+        title.setType(typeRepository.findOne(title.getType().getId()).orElseThrow(() ->
+                new TypeNotFoundException(String.format("Type with id=%s not found", title.getType().getId()))));
         titleRepository.update(title);
+    }
+
+    public void updateStatusForUser(int accountId, int titleId, TitleStateForUser state) {
+        titleStateRepository.createOrUpdate(accountId, titleId, state);
     }
 
     public void delete(int id) {
