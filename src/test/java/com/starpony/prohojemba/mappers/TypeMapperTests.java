@@ -9,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
+import java.util.Collections;
+import java.util.List;
+
 
 @SpringBootTest
 @SqlGroup({
@@ -18,6 +21,17 @@ import org.springframework.test.context.jdbc.SqlGroup;
 public class TypeMapperTests {
     @Autowired
     private TypeMapper typeMapper;
+
+    private List<Type> types;
+
+    public TypeMapperTests() {
+        types = Collections.emptyList();
+    }
+
+    @Test
+    public void selectAll_selectTypesList_returnTypesList() {
+
+    }
 
     @Test
     public void selectById_findTypeWithId3_returnType() {
