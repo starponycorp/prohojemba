@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.users;
 
+import com.starpony.prohojemba.models.User;
 import com.starpony.prohojemba.users.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

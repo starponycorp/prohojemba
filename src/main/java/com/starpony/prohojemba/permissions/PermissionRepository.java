@@ -1,5 +1,7 @@
 package com.starpony.prohojemba.permissions;
 
+import com.starpony.prohojemba.models.Permission;
+
 import java.util.List;
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
 package com.starpony.prohojemba.types;
 
+import com.starpony.prohojemba.models.Type;
 import com.starpony.prohojemba.types.exceptions.TypeAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

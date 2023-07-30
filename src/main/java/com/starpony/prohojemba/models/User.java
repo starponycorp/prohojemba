@@ -1,8 +1,9 @@
-package com.starpony.prohojemba.users;
+package com.starpony.prohojemba.models;
 
-import com.starpony.prohojemba.permissions.Permission;
+import com.starpony.prohojemba.models.Permission;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class User {
@@ -15,6 +16,13 @@ public class User {
     private String avatar;
 
     private List<Permission> permissions;
+
+    public User() {}
+
+    public User(int id, String email, String encodedPassword, boolean isLocked, String username, String avatar, List<Permission> permissions) {
+        this.id = id;this.email = email;this.encodedPassword = encodedPassword;this.isLocked = isLocked;
+        this.username = username;this.avatar = avatar;this.permissions = permissions;
+    }
 
     public int getId() {
         return id;
@@ -70,5 +78,22 @@ public class User {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+
+        if (obj instanceof User user)
+            return this.id == user.id && this.email.equals(user.email) && this.encodedPassword.equals(user.encodedPassword) &&
+                    this.isLocked == user.isLocked && this.username.equals(user.username) && this.avatar.equals(user.avatar) &&
+                    this.permissions.equals(user.permissions);
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
     }
 }

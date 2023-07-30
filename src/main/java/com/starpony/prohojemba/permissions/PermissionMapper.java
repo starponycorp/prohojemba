@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.permissions;
 
+import com.starpony.prohojemba.models.Permission;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

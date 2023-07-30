@@ -1,6 +1,8 @@
-package com.starpony.prohojemba.titles;
+package com.starpony.prohojemba.models;
 
-import com.starpony.prohojemba.types.Type;
+import com.starpony.prohojemba.models.Type;
+
+import java.util.Objects;
 
 
 public class Title {
@@ -9,6 +11,12 @@ public class Title {
     private String cover;
     private Type type;
     private String progress;
+
+    public Title() {}
+
+    public Title(int id, String name, String cover, Type type) {
+        this.id = id;this.name = name;this.cover = cover;this.type = type;
+    }
 
     public int getId() {
         return id;
@@ -48,5 +56,20 @@ public class Title {
 
     public void setProgress(String progress) {
         this.progress = progress;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (obj instanceof Title title)
+            return this.id == title.id && this.name.equals(title.name) && this.cover.equals(title.cover) && this.type.equals(title.type);
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, cover, type);
     }
 }

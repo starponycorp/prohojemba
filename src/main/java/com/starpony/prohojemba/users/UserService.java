@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.users;
 
+import com.starpony.prohojemba.models.User;
 import com.starpony.prohojemba.users.dto.EditProfileDto;
 import com.starpony.prohojemba.users.dto.UserDtoMapper;
 import com.starpony.prohojemba.users.exceptions.UserNotFoundException;

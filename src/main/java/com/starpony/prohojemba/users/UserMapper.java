@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.users;
 
+import com.starpony.prohojemba.models.User;
 import org.apache.ibatis.annotations.*;
 
 

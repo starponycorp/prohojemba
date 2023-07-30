@@ -1,8 +1,8 @@
 package com.starpony.prohojemba.titles;
 
+import com.starpony.prohojemba.models.Title;
 import com.starpony.prohojemba.titles.exceptions.TitleNotFoundException;
 import com.starpony.prohojemba.types.TypeRepository;
-import com.starpony.prohojemba.types.TypeService;
 import com.starpony.prohojemba.types.exceptions.TypeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

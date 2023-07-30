@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.permissions.dto;
 
-import com.starpony.prohojemba.permissions.Permission;
+import com.starpony.prohojemba.models.Permission;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.titles;
 
+import com.starpony.prohojemba.models.Title;
 import org.apache.ibatis.annotations.*;
 import org.mybatis.dynamic.sql.where.render.WhereClauseProvider;
 

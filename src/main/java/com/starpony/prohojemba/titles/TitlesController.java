@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.titles;
 
+import com.starpony.prohojemba.models.Title;
 import com.starpony.prohojemba.titles.dto.*;
 
 import jakarta.validation.Valid;

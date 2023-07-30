@@ -1,4 +1,4 @@
-package com.starpony.prohojemba.types;
+package com.starpony.prohojemba.models;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -6,8 +6,13 @@ import java.util.Objects;
 
 public class Type {
     private int id;
-    @NotBlank(message = "viewname is mandatory")
     private String viewName;
+
+    public Type() {};
+
+    public Type(int id, String viewName) {
+        this.id = id; this.viewName = viewName;
+    };
 
     public int getId() {
         return id;
@@ -26,12 +31,11 @@ public class Type {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
 
-        if (o instanceof Type type) {
+        if (obj instanceof Type type)
             return this.id == type.id && this.viewName.equals(type.viewName);
-        }
 
         return false;
     }

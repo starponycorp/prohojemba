@@ -1,12 +1,5 @@
 package com.starpony.prohojemba.types.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import com.starpony.prohojemba.types.Type;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-
 
 public class TypeDto {
     private int id;

@@ -1,7 +1,7 @@
 package com.starpony.prohojemba.types;
 
+import com.starpony.prohojemba.models.Type;
 import org.apache.ibatis.annotations.*;
-import org.springframework.jdbc.core.SqlProvider;
 
 import java.util.List;
 

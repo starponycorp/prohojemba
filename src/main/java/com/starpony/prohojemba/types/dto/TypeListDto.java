@@ -1,8 +1,5 @@
 package com.starpony.prohojemba.types.dto;
 
-import com.starpony.prohojemba.types.Type;
-
-import java.util.Collections;
 import java.util.List;
 
 

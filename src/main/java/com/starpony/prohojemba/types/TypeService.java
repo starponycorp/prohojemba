@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.types;
 
+import com.starpony.prohojemba.models.Type;
 import com.starpony.prohojemba.types.exceptions.TypeNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

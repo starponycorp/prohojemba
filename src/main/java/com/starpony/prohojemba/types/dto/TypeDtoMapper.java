@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.types.dto;
 
-import com.starpony.prohojemba.types.Type;
+import com.starpony.prohojemba.models.Type;
 
 import java.util.List;
 import java.util.stream.Collectors;

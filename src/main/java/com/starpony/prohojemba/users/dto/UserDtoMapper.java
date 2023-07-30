@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.users.dto;
 
-import com.starpony.prohojemba.users.User;
+import com.starpony.prohojemba.models.User;
 
 public class UserDtoMapper {
     public static User mapToUser(EditProfileDto editProfileDto) {

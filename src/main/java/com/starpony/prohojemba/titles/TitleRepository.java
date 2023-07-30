@@ -1,5 +1,7 @@
 package com.starpony.prohojemba.titles;
 
+import com.starpony.prohojemba.models.Title;
+
 import java.util.List;
 import java.util.Optional;
 

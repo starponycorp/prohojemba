@@ -1,5 +1,7 @@
 package com.starpony.prohojemba.users;
 
+import com.starpony.prohojemba.models.User;
+
 import java.util.Optional;
 
 

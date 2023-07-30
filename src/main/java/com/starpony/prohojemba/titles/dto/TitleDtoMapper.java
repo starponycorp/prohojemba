@@ -1,7 +1,7 @@
 package com.starpony.prohojemba.titles.dto;
 
-import com.starpony.prohojemba.titles.Title;
-import com.starpony.prohojemba.types.Type;
+import com.starpony.prohojemba.models.Title;
+import com.starpony.prohojemba.models.Type;
 import com.starpony.prohojemba.types.dto.TypeDtoMapper;
 
 import java.util.List;

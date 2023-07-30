@@ -1,10 +1,9 @@
 package com.starpony.prohojemba.titles;
 
-import org.mybatis.dynamic.sql.AliasableSqlTable;
+import com.starpony.prohojemba.models.Title;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
-import org.mybatis.dynamic.sql.render.RenderingStrategy;
 import org.mybatis.dynamic.sql.where.WhereDSL;
 import org.mybatis.dynamic.sql.where.render.WhereClauseProvider;
 import org.springframework.beans.factory.annotation.Autowired;

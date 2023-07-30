@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.permissions;
 
+import com.starpony.prohojemba.models.Permission;
 import com.starpony.prohojemba.permissions.exceptions.PermissionAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
