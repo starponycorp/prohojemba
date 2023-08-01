@@ -1,6 +1,7 @@
-package com.starpony.prohojemba.types;
+package com.starpony.prohojemba.controllers;
 
 import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.TypeService;
 import com.starpony.prohojemba.types.dto.TypeDto;
 import com.starpony.prohojemba.types.dto.TypeDtoMapper;
 import com.starpony.prohojemba.types.dto.TypeListDto;

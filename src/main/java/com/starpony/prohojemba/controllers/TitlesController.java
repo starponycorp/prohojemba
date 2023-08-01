@@ -1,6 +1,9 @@
-package com.starpony.prohojemba.titles;
+package com.starpony.prohojemba.controllers;
 
 import com.starpony.prohojemba.models.Title;
+import com.starpony.prohojemba.titles.QueryParams;
+import com.starpony.prohojemba.titles.TitleService;
+import com.starpony.prohojemba.titles.TitleStateForUser;
 import com.starpony.prohojemba.titles.dto.*;
 
 import jakarta.validation.Valid;

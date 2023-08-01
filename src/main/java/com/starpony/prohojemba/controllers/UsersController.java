@@ -1,5 +1,6 @@
-package com.starpony.prohojemba.users;
+package com.starpony.prohojemba.controllers;
 
+import com.starpony.prohojemba.users.UserService;
 import com.starpony.prohojemba.users.dto.CurrentUserDto;
 import com.starpony.prohojemba.users.dto.EditProfileDto;
 
