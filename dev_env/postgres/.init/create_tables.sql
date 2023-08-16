@@ -1,16 +1,13 @@
 create table accounts (
     id serial primary key,
     email varchar(64) unique not null,
+    username varchar(64) unique not null,
+    avatar varchar(128),
     encodedPassword varchar(128) not null,
     isLocked boolean not null default false
-);
-create index accountEmail on accounts using hash(email);
 
-create table profiles (
-    account integer references accounts on delete cascade,
-    username varchar(64) unique not null,
-    avatar varchar(128)
 );
+create index usersEmail on accounts using hash(email);
 
 create table permissions (
     id serial primary key,
@@ -39,7 +36,7 @@ create table titles (
 create table accountTitles (
     account integer references accounts on delete cascade,
     title integer references titles on delete cascade,
-    state varchar(16) not null,
+    progress varchar(16) not null,
     primary key (account, title)
 );
 

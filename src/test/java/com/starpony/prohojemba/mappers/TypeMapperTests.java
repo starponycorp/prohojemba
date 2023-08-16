@@ -1,7 +1,6 @@
 package com.starpony.prohojemba.mappers;
 
 import com.starpony.prohojemba.models.Type;
-import com.starpony.prohojemba.types.TypeMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,60 +1,84 @@
 package com.starpony.prohojemba.controllers;
 
-import com.starpony.prohojemba.models.Title;
-import com.starpony.prohojemba.titles.QueryParams;
-import com.starpony.prohojemba.titles.TitleService;
-import com.starpony.prohojemba.titles.TitleStateForUser;
-import com.starpony.prohojemba.titles.dto.*;
+import com.starpony.prohojemba.converters.TitleConverter;
+import com.starpony.prohojemba.dto.TitleEditDto;
+import com.starpony.prohojemba.dto.TitleDto;
+import com.starpony.prohojemba.dto.TitleListDto;
+import com.starpony.prohojemba.enums.TitleProgress;
+import com.starpony.prohojemba.filters.TitlesFilter;
+import com.starpony.prohojemba.models.User;
+import com.starpony.prohojemba.services.TitlesService;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 
 @RestController
 @RequestMapping(value = "/titles")
 public class TitlesController {
-    private final TitleService titleService;
+    private final TitlesService titlesService;
 
     @Autowired
-    public TitlesController(TitleService titleService) {
-        this.titleService = titleService;
+    public TitlesController(TitlesService titlesService) {
+        this.titlesService = titlesService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public TitleListDto getTitles(@Valid QueryParams queryParams) {
-        return TitleDtoMapper.mapToTitleListDto(titleService.getAll(queryParams));
+    public TitleListDto getTitles(
+            @RequestParam int limit,
+            @RequestParam int offset,
+            @RequestParam int type,
+            @RequestParam String search
+    ) {
+        TitlesFilter titlesFilter = new TitlesFilter();
+        titlesFilter.setType(type);
+        titlesFilter.setNameSearch(search);
+
+        User user = new User();
+        user.setId(1);
+
+        TitleListDto titleListDto = new TitleListDto();
+        titleListDto.setItems(titlesService.getAll(titlesFilter, limit, offset, user.getId())
+                .stream().map(TitleConverter::mapTo).collect(Collectors.toList()));
+
+        return titleListDto;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TitleDto getTitle(@PathVariable int id) {
-        return TitleDtoMapper.mapToTitleDto(titleService.getOne(id));
+        User user = new User();
+        user.setId(1);
+
+        return TitleConverter.mapTo(titlesService.getOne(id, user.getId()));
     }
 
-    @RequestMapping(value = "/{titleId}/state")
-    public void updateTitleStateForUser(@PathVariable int titleId, @RequestParam(name = "value") String state) {
-        TitleStateForUser titleStateForUser = TitleStateForUser.valueOf(state.toUpperCase());
-        int currentUserId = 1;
-        titleService.updateStatusForUser(currentUserId, titleId, titleStateForUser);
+    @RequestMapping(value = "/{titleId}/progress")
+    public void updateTitleProgressForUser(@PathVariable int titleId, @RequestParam(name = "value") String progress) {
+        TitleProgress titleProgress = TitleProgress.valueOf(progress.toUpperCase());
+
+        User user = new User();
+        user.setId(1);
+
+        titlesService.updateProgressForUser(user.getId(), titleId, titleProgress);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public TitleDto createTitle(@RequestBody EditTitleDto titleDto) {
-        Title title = TitleDtoMapper.mapToTitle(titleDto);
-        titleService.create(title);
-        return TitleDtoMapper.mapToTitleDto(title);
+    public TitleDto createTitle(@RequestBody TitleEditDto titleEditDto) {
+        return TitleConverter.mapTo(titlesService.create(titleEditDto));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public TitleDto updateTitle(@PathVariable int id, @RequestBody EditTitleDto titleDto) {
-        Title title = TitleDtoMapper.mapToTitle(titleDto);
-        title.setId(id);
-        titleService.update(title);
-        return TitleDtoMapper.mapToTitleDto(title);
+    public TitleDto updateTitle(@PathVariable int id, @RequestBody TitleEditDto titleEditDto) {
+        User user = new User();
+        user.setId(1);
+
+        return TitleConverter.mapTo(titlesService.update(id, titleEditDto, user.getId()));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteTitle(@PathVariable int id) {
-        titleService.delete(id);
+        titlesService.delete(id);
     }
 }
