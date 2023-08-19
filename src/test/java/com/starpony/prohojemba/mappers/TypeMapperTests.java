@@ -1,14 +1,16 @@
 package com.starpony.prohojemba.mappers;
 
 import com.starpony.prohojemba.models.Type;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
-import java.util.Collections;
 import java.util.List;
 
 
@@ -21,32 +23,89 @@ public class TypeMapperTests {
     @Autowired
     private TypeMapper typeMapper;
 
-    private List<Type> types;
-
-    public TypeMapperTests() {
-        types = Collections.emptyList();
-    }
-
     @Test
     public void selectAll_selectTypesList_returnTypesList() {
+        List<Type> types = List.of(
+                new Type(1, "Games"),
+                new Type(2, "Movies"),
+                new Type(3, "Series")
+        );
 
+        Assertions.assertIterableEquals(typeMapper.selectAll(), types);
     }
 
     @Test
-    public void selectById_findTypeWithId3_returnType() {
-        Type type = new Type();
-        type.setId(3);
-        type.setViewName("Series");
+    public void selectById_idExist_returnType() {
+        Type type = new Type(3, "Series");
 
-        Type searchedType = typeMapper.selectById(3);
-
-        Assertions.assertEquals(searchedType, type);
+        Assertions.assertEquals(typeMapper.selectById(3), type);
     }
 
     @Test
-    public void selectById_findTypeWithId5_returnNull() {
-        Type searchedType = typeMapper.selectById(5);
+    public void selectById_idNotExist_returnNull() {
+        Assertions.assertNull(typeMapper.selectById(5));
+    }
 
-        Assertions.assertNull(searchedType);
+    @Test
+    public void selectByViewName_viewNameExist_returnType() {
+        Type type = new Type(2, "Movies");
+
+        Assertions.assertEquals(typeMapper.selectByViewName("Movies"), type);
+    }
+
+    @Test
+    public void selectByViewName_viewNameNotExist_returnNull() {
+        Assertions.assertNull(typeMapper.selectByViewName("Test"));
+    }
+
+    @Test
+    public void create_viewNameNotExist_correctCreate() {
+        Type type = new Type(0, "Test");
+        typeMapper.create(type);
+
+        Assertions.assertEquals(type.getId(), 4);
+    }
+
+    @Test
+    public void create_viewNameAlreadyExist_throwException() {
+        Type type = new Type(0, "Games");
+
+        Assertions.assertThrows(DuplicateKeyException.class, () -> typeMapper.create(type));
+    }
+
+    @Test
+    public void create_viewNameNull_throwException() {
+        Type type = new Type(0, null);
+
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> typeMapper.create(type));
+    }
+
+    @Test
+    public void update_viewNameNotExist_correctUpdate() {
+        Type type = new Type(3, "Test");
+        typeMapper.update(type);
+
+        Assertions.assertEquals(type, typeMapper.selectById(3));
+    }
+
+    @Test
+    public void update_viewNameExist_throwException() {
+        Type type = new Type(3, "Movies");
+
+        Assertions.assertThrows(DuplicateKeyException.class, () -> typeMapper.update(type));
+    }
+
+    @Test
+    public void update_viewNameNull_throwException() {
+        Type type = new Type(3, null);
+
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> typeMapper.update(type));
+    }
+
+    @Test
+    public void delete_correctDelete() {
+        typeMapper.delete(3);
+
+        Assertions.assertNull(typeMapper.selectById(3));
     }
 }
