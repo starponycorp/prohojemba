@@ -2,6 +2,7 @@ package com.starpony.prohojemba.filters;
 
 import jakarta.validation.constraints.Min;
 
+
 public class TitlesFilter implements Filter{
     @Min(value = 0, message = "Type id cannot be less than 0")
     private int type;
