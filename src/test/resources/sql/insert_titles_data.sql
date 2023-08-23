@@ -5,7 +5,7 @@ insert into titles (name, cover, type) values
 insert into titles (name, cover, type) values
     ('Persona 3 FES', null, 1);
 insert into titles (name, cover, type) values
-    ('Buldurs Gate 3', '/covers/2.webp', 1);
+    ('Baldurs Gate 3', '/covers/2.webp', 1);
 insert into titles (name, cover, type) values
     ('Portal', '/covers/3.webp', 1);
 insert into titles (name, cover, type) values

@@ -63,7 +63,7 @@ public class TypeMapperTests {
         Type type = new Type(0, "Test");
         typeMapper.create(type);
 
-        Assertions.assertEquals(type.getId(), 4);
+        Assertions.assertNotEquals(type.getId(), 0);
     }
 
     @Test

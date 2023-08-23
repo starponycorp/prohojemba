@@ -29,7 +29,7 @@ public class TitlesFilter implements Filter{
         String whereClause = null;
 
         if (type > 0)
-            whereClause = String.format("where titles.type == %s", type);
+            whereClause = String.format("where titles.type = %s", type);
 
         if (nameSearch != null) {
             whereClause = whereClause == null?String.format("where titles.name ilike '%s'", nameSearch):

@@ -10,5 +10,3 @@ insert into accounttitles (account, title, progress) values
     (1, 11, 'COMPLETE');
 insert into accounttitles (account, title, progress) values
     (1, 12, 'COMPLETE');
-insert into accounttitles (account, title, progress) values
-    (1, 4, 'IN_PROGRESS');
