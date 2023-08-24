@@ -63,7 +63,10 @@ public class Title {
         if (this == obj) return true;
 
         if (obj instanceof Title title)
-            return this.id == title.id && this.name.equals(title.name) && this.cover.equals(title.cover) && this.type.equals(title.type);
+            return this.id == title.id &&
+                    Objects.equals(this.name, title.name) &&
+                    Objects.equals(this.cover, title.cover) &&
+                    Objects.equals(this.type, title.type);
 
         return false;
     }
