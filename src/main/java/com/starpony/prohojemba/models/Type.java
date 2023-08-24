@@ -35,7 +35,7 @@ public class Type {
         if (this == obj) return true;
 
         if (obj instanceof Type type)
-            return this.id == type.id && this.viewName.equals(type.viewName);
+            return this.id == type.id && Objects.equals(this.viewName, type.viewName);
 
         return false;
     }

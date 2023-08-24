@@ -85,9 +85,13 @@ public class User {
         if(this == obj) return true;
 
         if (obj instanceof User user)
-            return this.id == user.id && this.email.equals(user.email) && this.encodedPassword.equals(user.encodedPassword) &&
-                    this.isLocked == user.isLocked && this.username.equals(user.username) && this.avatar.equals(user.avatar) &&
-                    this.permissions.equals(user.permissions);
+            return this.id == user.id &&
+                    Objects.equals(this.email, user.email) &&
+                    Objects.equals(this.encodedPassword, user.encodedPassword) &&
+                    this.isLocked == user.isLocked &&
+                    Objects.equals(this.username, user.username) &&
+                    Objects.equals(this.avatar, user.avatar) &&
+                    Objects.equals(this.permissions, user.permissions);
 
         return false;
     }
