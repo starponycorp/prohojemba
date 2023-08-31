@@ -4,7 +4,6 @@ import com.starpony.prohojemba.enums.TitleProgress;
 import com.starpony.prohojemba.filters.TitlesFilter;
 import com.starpony.prohojemba.mappers.TitleMapper;
 import com.starpony.prohojemba.models.Title;
-import com.starpony.prohojemba.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

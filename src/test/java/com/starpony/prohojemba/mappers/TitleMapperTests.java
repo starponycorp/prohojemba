@@ -35,7 +35,7 @@ public class TitleMapperTests {
 
     @Test
     public void selectAllWithUserProgress_withoutFilter_returnTitles() {
-        List<Title> expected_result = List.of(
+        List<Title> expectedResult = List.of(
                 new Title(4, "Baldurs Gate 3", "/covers/2.webp", new Type(1, "Games")),
                 new Title(12, "Better call Saul", "/covers/1.webp", new Type(3, "Series")),
                 new Title(10, "Billy Herrington and Philosophic Cum", "/covers/1.webp", new Type(2, "Movies")),
@@ -49,12 +49,12 @@ public class TitleMapperTests {
 
         List<Title> result = titleMapper.selectAllWithUserProgress(whereClause, 1, 5, 0);
 
-        Assertions.assertIterableEquals(result, expected_result);
+        Assertions.assertIterableEquals(result, expectedResult);
     }
 
     @Test
     public void selectAllWithUserProgress_filterByType_returnTitles() {
-        List<Title> expected_result = List.of(
+        List<Title> expectedResult = List.of(
                 new Title(12, "Better call Saul", "/covers/1.webp", new Type(3, "Series")),
                 new Title(11, "Breaking Bad", "/covers/6.webp", new Type(3, "Series")),
                 new Title(13, "FLCL", "/covers/1.webp", new Type(3, "Series")),
@@ -68,12 +68,12 @@ public class TitleMapperTests {
 
         List<Title> result = titleMapper.selectAllWithUserProgress(whereClause, 1, 5, 0);
 
-        Assertions.assertIterableEquals(result, expected_result);
+        Assertions.assertIterableEquals(result, expectedResult);
     }
 
     @Test
     public void selectAllWithUserProgress_filterByName_returnTitles() {
-        List<Title> expected_result = List.of(
+        List<Title> expectedResult = List.of(
             new Title(3, "Persona 3 FES", null, new Type(1, "Games")),
             new Title(2, "Persona 5 Royal", "/covers/1.webp", new Type(1, "Games")),
             new Title(8, "Persona Movie", "/covers/1.webp", new Type(2, "Movies"))
@@ -86,12 +86,12 @@ public class TitleMapperTests {
 
         List<Title> result = titleMapper.selectAllWithUserProgress(whereClause, 1, 5, 0);
 
-        Assertions.assertIterableEquals(result, expected_result);
+        Assertions.assertIterableEquals(result, expectedResult);
     }
 
     @Test
     public void selectAllWithUserProgress_filterByNameAndType_returnTitles() {
-        List<Title> expected_result = List.of(
+        List<Title> expectedResult = List.of(
                 new Title(3, "Persona 3 FES", null, new Type(1, "Games")),
                 new Title(2, "Persona 5 Royal", "/covers/1.webp", new Type(1, "Games"))
         );
@@ -104,12 +104,12 @@ public class TitleMapperTests {
 
         List<Title> result = titleMapper.selectAllWithUserProgress(whereClause, 1, 5, 0);
 
-        Assertions.assertIterableEquals(result, expected_result);
+        Assertions.assertIterableEquals(result, expectedResult);
     }
 
     @Test
     public void selectAllWithUserProgress_limit3AndOffset2_returnTitles() {
-        List<Title> expected_result = List.of(
+        List<Title> expectedResult = List.of(
                 new Title(10, "Billy Herrington and Philosophic Cum", "/covers/1.webp", new Type(2, "Movies")),
                 new Title(11, "Breaking Bad", "/covers/6.webp", new Type(3, "Series")),
                 new Title(13, "FLCL", "/covers/1.webp", new Type(3, "Series"))
@@ -121,19 +121,19 @@ public class TitleMapperTests {
 
         List<Title> result = titleMapper.selectAllWithUserProgress(whereClause, 1, 3, 2);
 
-        Assertions.assertIterableEquals(result, expected_result);
+        Assertions.assertIterableEquals(result, expectedResult);
     }
 
     @Test
     public void selectByIdWithUserProgress_idExists_returnTitle() {
-        Title expected_result = new Title(11, "Breaking Bad", "/covers/6.webp", new Type(3, "Series"));
-        expected_result.setProgress("COMPLETE");
+        Title expectedResult = new Title(11, "Breaking Bad", "/covers/6.webp", new Type(3, "Series"));
+        expectedResult.setProgress("COMPLETE");
 
         Title result = titleMapper.selectByIdWithUserProgress(11, 1);
 
-        Assertions.assertEquals(result, expected_result);
+        Assertions.assertEquals(result, expectedResult);
         // Проверка пользовательского прогресса
-        Assertions.assertEquals(result.getProgress(), expected_result.getProgress());
+        Assertions.assertEquals(result.getProgress(), expectedResult.getProgress());
     }
 
     @Test

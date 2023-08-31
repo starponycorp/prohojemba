@@ -1,12 +1,10 @@
 package com.starpony.prohojemba.models;
 
-import com.starpony.prohojemba.models.Permission;
-
 import java.util.List;
 import java.util.Objects;
 
 
-public class User {
+public class Account {
     private int id;
     private String email;
     private String encodedPassword;
@@ -17,9 +15,9 @@ public class User {
 
     private List<Permission> permissions;
 
-    public User() {}
+    public Account() {}
 
-    public User(int id, String email, String encodedPassword, boolean isLocked, String username, String avatar, List<Permission> permissions) {
+    public Account(int id, String email, String encodedPassword, boolean isLocked, String username, String avatar, List<Permission> permissions) {
         this.id = id;this.email = email;this.encodedPassword = encodedPassword;this.isLocked = isLocked;
         this.username = username;this.avatar = avatar;this.permissions = permissions;
     }
@@ -84,14 +82,14 @@ public class User {
     public boolean equals(Object obj) {
         if(this == obj) return true;
 
-        if (obj instanceof User user)
-            return this.id == user.id &&
-                    Objects.equals(this.email, user.email) &&
-                    Objects.equals(this.encodedPassword, user.encodedPassword) &&
-                    this.isLocked == user.isLocked &&
-                    Objects.equals(this.username, user.username) &&
-                    Objects.equals(this.avatar, user.avatar) &&
-                    Objects.equals(this.permissions, user.permissions);
+        if (obj instanceof Account account)
+            return this.id == account.id &&
+                    Objects.equals(this.email, account.email) &&
+                    Objects.equals(this.encodedPassword, account.encodedPassword) &&
+                    this.isLocked == account.isLocked &&
+                    Objects.equals(this.username, account.username) &&
+                    Objects.equals(this.avatar, account.avatar) &&
+                    Objects.equals(this.getPermissions(), account.getPermissions());
 
         return false;
     }

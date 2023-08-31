@@ -11,6 +11,9 @@ public interface PermissionMapper {
     @Select("select * from permissions")
     List<Permission> selectAll();
 
+    @Select("select p.* from accountpermissions ap join permissions p ON p.id = ap.permission where ap.account = #{accountId}")
+    List<Permission> selectByAccount(int accountId);
+
     @Select("select * from permissions where id=#{id}")
     Permission selectById(int id);
 

@@ -7,7 +7,7 @@ create table accounts (
     isLocked boolean not null default false
 
 );
-create index usersEmail on accounts using hash(email);
+create index accounts_email on accounts using hash(email);
 
 create table permissions (
     id serial primary key,

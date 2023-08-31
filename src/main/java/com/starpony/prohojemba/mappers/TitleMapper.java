@@ -3,7 +3,6 @@ package com.starpony.prohojemba.mappers;
 import com.starpony.prohojemba.enums.TitleProgress;
 import com.starpony.prohojemba.models.Title;
 import org.apache.ibatis.annotations.*;
-import org.mybatis.dynamic.sql.where.render.WhereClauseProvider;
 
 import java.util.List;
 

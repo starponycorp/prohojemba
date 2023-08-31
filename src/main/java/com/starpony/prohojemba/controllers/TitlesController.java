@@ -6,7 +6,7 @@ import com.starpony.prohojemba.dto.TitleDto;
 import com.starpony.prohojemba.dto.TitleListDto;
 import com.starpony.prohojemba.enums.TitleProgress;
 import com.starpony.prohojemba.filters.TitlesFilter;
-import com.starpony.prohojemba.models.User;
+import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.services.TitlesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,11 @@ public class TitlesController {
         titlesFilter.setType(type);
         titlesFilter.setNameSearch(search);
 
-        User user = new User();
-        user.setId(1);
+        Account account = new Account();
+        account.setId(1);
 
         TitleListDto titleListDto = new TitleListDto();
-        titleListDto.setItems(titlesService.getAll(titlesFilter, limit, offset, user.getId())
+        titleListDto.setItems(titlesService.getAll(titlesFilter, limit, offset, account.getId())
                 .stream().map(TitleConverter::mapTo).collect(Collectors.toList()));
 
         return titleListDto;
@@ -48,20 +48,20 @@ public class TitlesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TitleDto getTitle(@PathVariable int id) {
-        User user = new User();
-        user.setId(1);
+        Account account = new Account();
+        account.setId(1);
 
-        return TitleConverter.mapTo(titlesService.getOne(id, user.getId()));
+        return TitleConverter.mapTo(titlesService.getOne(id, account.getId()));
     }
 
     @RequestMapping(value = "/{titleId}/progress")
     public void updateTitleProgressForUser(@PathVariable int titleId, @RequestParam(name = "value") String progress) {
         TitleProgress titleProgress = TitleProgress.valueOf(progress.toUpperCase());
 
-        User user = new User();
-        user.setId(1);
+        Account account = new Account();
+        account.setId(1);
 
-        titlesService.updateProgressForUser(user.getId(), titleId, titleProgress);
+        titlesService.updateProgressForUser(account.getId(), titleId, titleProgress);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -71,10 +71,10 @@ public class TitlesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public TitleDto updateTitle(@PathVariable int id, @RequestBody TitleEditDto titleEditDto) {
-        User user = new User();
-        user.setId(1);
+        Account account = new Account();
+        account.setId(1);
 
-        return TitleConverter.mapTo(titlesService.update(id, titleEditDto, user.getId()));
+        return TitleConverter.mapTo(titlesService.update(id, titleEditDto, account.getId()));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -1,7 +1,7 @@
 package com.starpony.prohojemba.repositories;
 
 import com.starpony.prohojemba.mappers.AccountMapper;
-import com.starpony.prohojemba.models.User;
+import com.starpony.prohojemba.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +17,7 @@ public class UsersDatabaseRepository {
         this.accountMapper = accountMapper;
     }
 
-    public Optional<User> getById(int id) {
+    public Optional<Account> getById(int id) {
         return Optional.ofNullable(accountMapper.selectById(id));
     }
 }
