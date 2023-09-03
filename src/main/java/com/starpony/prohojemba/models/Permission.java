@@ -1,8 +1,10 @@
 package com.starpony.prohojemba.models;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.Objects;
 
-public class Permission {
+public class Permission implements GrantedAuthority {
     private int id;
     private String systemName;
     private String viewName;
@@ -50,5 +52,10 @@ public class Permission {
     @Override
     public int hashCode() {
         return Objects.hash(id, systemName, viewName);
+    }
+
+    @Override
+    public String getAuthority() {
+        return systemName;
     }
 }
