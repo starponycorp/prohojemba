@@ -8,13 +8,13 @@ import java.util.Collection;
 
 public class JWTAuthentication implements Authentication {
     private final Object jwtToken;
-    private final Object account;
-    private final Collection<GrantedAuthority> authorities;
+    private final Object accountId;
+    private final Collection<? extends GrantedAuthority> authorities;
     private boolean isAuthenticated;
 
-    public JWTAuthentication(Object jwtToken, Object account, Collection<GrantedAuthority> authorities) {
+    public JWTAuthentication(Object jwtToken, Object accountId, Collection<? extends GrantedAuthority> authorities) {
         this.jwtToken = jwtToken;
-        this.account = account;
+        this.accountId = accountId;
         this.authorities = authorities;
     }
 
@@ -31,7 +31,7 @@ public class JWTAuthentication implements Authentication {
 
     @Override
     public Object getDetails() {
-        return this.account;
+        return this.accountId;
     }
 
     // Возвращает id пользователя

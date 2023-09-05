@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.Optional;
 
 
@@ -23,10 +24,16 @@ public class JWTAuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String jwtToken = (String) authentication.getCredentials();
+        Optional<Account> account = jwtUtils.extractAccessToken(jwtToken);
+        JWTAuthentication newAuthentication = null;
 
-        Account account 
+        if (account.isPresent()) {
+            newAuthentication = new JWTAuthentication(null, account.get().getId(),
+                    account.get().getPermissions());
+            newAuthentication.setAuthenticated(true);
+        }
 
-        JWTAuthentication newAuthentication = new JWTAuthentication();
+        return newAuthentication;
     }
 
     @Override
