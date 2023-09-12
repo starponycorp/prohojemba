@@ -57,7 +57,7 @@ public class JWTUtils {
 
     private String generateToken(Account account, Algorithm algorithm, long expiration) {
         return JWT.create()
-                .withExpiresAt(new Date(System.currentTimeMillis() + expiration))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expiration * 1000))
                 .withClaim("userId", account.getId())
                 .withClaim("permissions",
                         account.getPermissions().stream().map(Permission::getSystemName).toList())

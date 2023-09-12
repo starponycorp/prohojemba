@@ -61,10 +61,11 @@ public class ApplicationConfig {
         Настройка авторизации и аутентификации приложения
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JWTUtils jwtUtils) throws Exception{
         return httpSecurity.cors().and().csrf().disable().
+            authorizeHttpRequests().anyRequest().authenticated().and().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-                // Настройка прав доступа к контроллерам
-                        authorizeHttpRequests().anyRequest().permitAll().and().build();
+                authenticationProvider(authenticationProvider(jwtUtils)).
+                addFilterBefore(new JWTFilter(), UsernamePasswordAuthenticationFilter.class).build();
     }
 }
