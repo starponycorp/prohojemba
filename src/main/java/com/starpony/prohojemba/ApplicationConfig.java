@@ -61,13 +61,9 @@ public class ApplicationConfig {
         Настройка авторизации и аутентификации приложения
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, JWTAuthProvider authProvider) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.cors().and().csrf().disable().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-
-                authenticationProvider(authProvider).
-                addFilterAt(new JWTFilter(), UsernamePasswordAuthenticationFilter.class).
-
                 // Настройка прав доступа к контроллерам
                         authorizeHttpRequests().anyRequest().permitAll().and().build();
     }
