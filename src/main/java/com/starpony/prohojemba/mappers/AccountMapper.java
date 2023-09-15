@@ -18,6 +18,14 @@ public interface AccountMapper {
     })
     Account selectById(int id);
 
+    @Select("select * from accounts where email = #{email}")
+    @Results({
+            @Result(property = "id", column = "id", id = true),
+            @Result(property = "permissions", column = "id", javaType = List.class,
+                    many = @Many(select = "com.starpony.prohojemba.mappers.PermissionMapper.selectByAccount", fetchType = FetchType.LAZY))
+    })
+    Account selectByEmail(String email);
+
     @Select("select * from accounts where accounts.username=#{username}")
     @Results({
             @Result(property = "id", column = "id", id = true),

@@ -2,7 +2,7 @@ package com.starpony.prohojemba.services;
 
 import com.starpony.prohojemba.exceptions.ItemNotFoundException;
 import com.starpony.prohojemba.models.Account;
-import com.starpony.prohojemba.repositories.UsersDatabaseRepository;
+import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
 import com.starpony.prohojemba.dto.ProfileEditDto;
 
 import jakarta.validation.Valid;
@@ -14,10 +14,10 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 public class UsersService {
-    private final UsersDatabaseRepository userRepository;
+    private final AccountsDatabaseRepository userRepository;
 
     @Autowired
-    public UsersService(UsersDatabaseRepository userRepository) {
+    public UsersService(AccountsDatabaseRepository userRepository) {
         this.userRepository = userRepository;
     }
 
