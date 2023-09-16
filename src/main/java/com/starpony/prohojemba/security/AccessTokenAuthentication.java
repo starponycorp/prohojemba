@@ -6,7 +6,7 @@ import java.util.Collection;
 
 
 public class AccessTokenAuthentication extends TokenAuthentication{
-    public AccessTokenAuthentication(Object credentials, Object details, Object principal, Collection<GrantedAuthority> authorities) {
+    public AccessTokenAuthentication(Object credentials, Object details, Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(credentials, details, principal, authorities);
     }
 }

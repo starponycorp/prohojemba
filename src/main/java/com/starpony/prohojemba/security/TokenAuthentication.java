@@ -13,12 +13,12 @@ public abstract class TokenAuthentication implements Authentication {
     private final Object credentials;
     private final Object details;
     private final Object principal;
-    private final Collection<GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     private boolean isAuthenticated = false;
 
     public TokenAuthentication(Object credentials, Object details, Object principal,
-                               Collection<GrantedAuthority> authorities) {
+                               Collection<? extends GrantedAuthority> authorities) {
         this.credentials = credentials;
         this.details = details;
         this.principal = principal;

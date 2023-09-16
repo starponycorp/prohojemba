@@ -6,7 +6,7 @@ import java.util.Collection;
 
 
 public class RefreshTokenAuthentication extends TokenAuthentication{
-    public RefreshTokenAuthentication(Object credentials, Object details, Object principal, Collection<GrantedAuthority> authorities) {
+    public RefreshTokenAuthentication(Object credentials, Object details, Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(credentials, details, principal, authorities);
     }
 }
