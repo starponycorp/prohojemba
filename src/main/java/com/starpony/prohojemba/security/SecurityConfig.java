@@ -63,7 +63,7 @@ public class SecurityConfig {
         return httpSecurity.cors().and().csrf().disable().httpBasic().disable().formLogin().disable().logout().disable().
                 authorizeHttpRequests().anyRequest().authenticated().and().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-                authenticationProvider(authenticationProvider()).
+                
                 addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 }
