@@ -5,15 +5,13 @@ import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
 import com.starpony.prohojemba.repositories.RefreshTokenRepository;
 import com.starpony.prohojemba.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 import javax.security.auth.login.AccountExpiredException;
@@ -53,7 +51,6 @@ public class RefreshTokenAuthProvider implements AuthenticationProvider {
         RefreshTokenAuthentication newAuthentication = new RefreshTokenAuthentication(
                 null, null, account, account.getAuthorities());
         newAuthentication.setAuthenticated(true);
-
         return newAuthentication;
     }
 
