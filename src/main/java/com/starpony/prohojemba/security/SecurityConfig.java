@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -44,7 +45,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
@@ -52,10 +53,16 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-//        ProviderManager providerManager = new ProviderManager();
-//        return providerManager;
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity,
+                                                       AccessTokenAuthProvider accessTokenAuthProvider,
+                                                       RefreshTokenAuthProvider refreshTokenAuthProvider) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.
+                authenticationProvider(accessTokenAuthProvider).
+                authenticationProvider(refreshTokenAuthProvider).
+                authenticationProvider(daoAuthenticationProvider());
+        return authenticationManagerBuilder.build();
     }
 
     @Bean
@@ -63,7 +70,7 @@ public class SecurityConfig {
         return httpSecurity.cors().and().csrf().disable().httpBasic().disable().formLogin().disable().logout().disable().
                 authorizeHttpRequests().anyRequest().authenticated().and().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-                
+
                 addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 }
