@@ -1,5 +1,6 @@
 package com.starpony.prohojemba.security;
 
+import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
 import com.starpony.prohojemba.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,30 +25,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final JWTFilter jwtFilter;
-    private final JWTUtils jwtUtils;
-
-    @Autowired
-    public SecurityConfig(JWTFilter jwtFilter, JWTUtils jwtUtils) {
-        this.jwtFilter = jwtFilter;
-        this.jwtUtils = jwtUtils;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return token ->
-                jwtUtils.extractAccessToken(token).orElseThrow(() -> new UsernameNotFoundException("Invalid access token"));
+    public UserDetailsService userDetailsService(AccountsDatabaseRepository accountsRepository) {
+        return email -> accountsRepository.getByEmail(email).orElseThrow(() ->
+                new UsernameNotFoundException(String.format("Account with email=%s not found", email)));
     }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(userDetailsService(null));
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
@@ -71,6 +63,10 @@ public class SecurityConfig {
                 authorizeHttpRequests().anyRequest().authenticated().and().
                 sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
 
-                addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class).build();
+                addFilterAt(
+                        new JWTFilter(authenticationManager(null, null, null)),
+                        UsernamePasswordAuthenticationFilter.class)
+
+                .build();
     }
 }

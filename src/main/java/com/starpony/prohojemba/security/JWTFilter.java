@@ -17,16 +17,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-
-@Component
 public class JWTFilter extends OncePerRequestFilter {
     private final AuthenticationManager authenticationManager;
-    private final JWTUtils jwtUtils;
 
-    @Autowired
-    public JWTFilter(AuthenticationManager authenticationManager, JWTUtils jwtUtils) {
+    public JWTFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
     }
 
     @Override
