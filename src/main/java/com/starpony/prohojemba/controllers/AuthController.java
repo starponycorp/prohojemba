@@ -1,19 +1,18 @@
 package com.starpony.prohojemba.controllers;
 
 import com.starpony.prohojemba.dto.LoginDto;
+import com.starpony.prohojemba.dto.RefreshTokenDto;
 import com.starpony.prohojemba.dto.TokensPairDto;
 import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.repositories.RefreshTokenRepository;
+import com.starpony.prohojemba.security.RefreshTokenAuthentication;
 import com.starpony.prohojemba.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -41,18 +40,27 @@ public class AuthController {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
-        String password = passwordEncoder.encode("testpassword");
-
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
         Account account = (Account) authentication.getPrincipal();
 
+        return createTokensPair(account);
+    }
+
+    @RequestMapping(value = "/token", method = RequestMethod.POST)
+    public TokensPairDto updateAuthTokensPair(@RequestBody RefreshTokenDto tokenDto) {
+        RefreshTokenAuthentication refreshTokenAuthentication =
+                new RefreshTokenAuthentication(tokenDto.getRefreshToken(), null, null, null);
+
+        Authentication authentication = authenticationManager.authenticate(refreshTokenAuthentication);
+        Account account = (Account) authentication.getPrincipal();
+
+        return createTokensPair(account);
+    }
+
+    private TokensPairDto createTokensPair(Account account) {
         String refreshToken = jwtUtils.generateRefreshToken(account);
         refreshTokenRepository.create(refreshToken, account.getId());
         String accessToken = jwtUtils.generateAccessToken(account);
         return new TokensPairDto(accessToken, refreshToken);
     }
-
-    @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public void updateAuthTokensPair() {}
 }
