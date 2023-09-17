@@ -1,18 +1,11 @@
 package com.starpony.prohojemba.security;
 
-import com.starpony.prohojemba.utils.JWTUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -37,7 +30,8 @@ public class JWTFilter extends OncePerRequestFilter {
 
         jwtToken = bearerHeader.substring(7);
 
-        authenticationManager.authenticate(new AccessTokenAuthentication(jwtToken, null, null, null));
+        SecurityContextHolder.getContext().setAuthentication(
+                authenticationManager.authenticate(new AccessTokenAuthentication(jwtToken, null, null, null)));
 
         filterChain.doFilter(request, response);
     }

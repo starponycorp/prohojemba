@@ -31,7 +31,6 @@ public class AccessTokenAuthProvider implements AuthenticationProvider {
                 userDetails.getAuthorities()
         );
         newAuthentication.setAuthenticated(true);
-
         return newAuthentication;
     }
 
