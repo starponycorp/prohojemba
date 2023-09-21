@@ -54,7 +54,7 @@ public class TitlesController {
         return TitleConverter.mapTo(titlesService.getOne(id, account.getId()));
     }
 
-    @RequestMapping(value = "/{titleId}/progress")
+    @RequestMapping(value = "/{titleId}/progress", method = RequestMethod.POST)
     public void updateTitleProgressForUser(@PathVariable int titleId, @RequestParam(name = "value") String progress) {
         TitleProgress titleProgress = TitleProgress.valueOf(progress.toUpperCase());
 

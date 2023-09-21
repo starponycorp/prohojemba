@@ -1,19 +1,17 @@
 package com.starpony.prohojemba.security;
 
+import com.starpony.prohojemba.enums.Permissions;
 import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
-import com.starpony.prohojemba.utils.JWTUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -59,16 +57,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity.cors().and().csrf().disable().
-                authorizeHttpRequests().
-                requestMatchers("/api/auth/login", "/api/auth/token").permitAll().
-                anyRequest().authenticated().and().
-                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-
+        return httpSecurity.
+                csrf(AbstractHttpConfigurer::disable).
+                authorizeHttpRequests(auth -> auth.
+                        requestMatchers("/auth/**").permitAll().
+                        requestMatchers(HttpMethod.POST, "/titles").hasAuthority(Permissions.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.PUT, "/titles/*").hasAuthority(Permissions.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.DELETE, "/titles/*").hasAuthority(Permissions.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.POST, "/types").hasAuthority(Permissions.MANAGE_TYPES.name()).
+                        requestMatchers(HttpMethod.PUT, "/types/*").hasAuthority(Permissions.MANAGE_TYPES.name()).
+                        requestMatchers(HttpMethod.DELETE, "types/*").hasAuthority(Permissions.MANAGE_TYPES.name()).
+                        anyRequest().authenticated()
+                        ).
                 addFilterAt(
                         new JWTFilter(authenticationManager(null, null, null)),
-                        UsernamePasswordAuthenticationFilter.class)
+                        UsernamePasswordAuthenticationFilter.class).
 
-                .build();
+                build();
     }
 }
