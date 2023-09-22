@@ -54,6 +54,27 @@ public class AccountMapperTest {
     }
 
     @Test
+    public void selectByEmail_emailExist_returnAccount() {
+        Account expectedResult = new Account(2, "defaultuser@email.com",
+                "$2a$04$k3imaBhoYjU4/K7rMCK4j.GykrXBhaNYejS6hNYyfeXFxGCBg8GP6",
+                false, "default", null,
+                List.of(
+                        new Permission(2, "MANAGE_TYPES", "Manage Types")
+                ));
+
+        Account result = accountMapper.selectByEmail("defaultuser@email.com");
+
+        Assertions.assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void selectByEmail_emailNotExist_returnNull() {
+        Account result = accountMapper.selectByEmail("test@mail.com");
+
+        Assertions.assertNull(result);
+    }
+
+    @Test
     public void selectByUsername_usernameExist_returnAccount() {
         Account expectedResult = new Account(2, "defaultuser@email.com",
                 "$2a$04$k3imaBhoYjU4/K7rMCK4j.GykrXBhaNYejS6hNYyfeXFxGCBg8GP6",

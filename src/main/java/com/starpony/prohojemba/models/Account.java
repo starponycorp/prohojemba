@@ -1,10 +1,14 @@
 package com.starpony.prohojemba.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 
-public class Account {
+public class Account implements UserDetails {
     private int id;
     private String email;
     private String encodedPassword;
@@ -46,11 +50,11 @@ public class Account {
         this.encodedPassword = encodedPassword;
     }
 
-    public boolean isLocked() {
+    public boolean getIsLocked() {
         return isLocked;
     }
 
-    public void setLocked(boolean locked) {
+    public void setIsLocked(boolean locked) {
         isLocked = locked;
     }
 
@@ -76,6 +80,36 @@ public class Account {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getPermissions();
+    }
+
+    @Override
+    public String getPassword() {
+        return getEncodedPassword();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return !getIsLocked();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !getIsLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !getIsLocked();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !getIsLocked();
     }
 
     @Override

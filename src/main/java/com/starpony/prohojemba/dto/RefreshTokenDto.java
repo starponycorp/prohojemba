@@ -1,10 +1,6 @@
 package com.starpony.prohojemba.dto;
 
-
-import jakarta.validation.constraints.NotBlank;
-
-public class TokensUpdateDto {
-    @NotBlank(message = "Refresh token cannot be empty")
+public class RefreshTokenDto {
     private String refreshToken;
 
     public String getRefreshToken() {

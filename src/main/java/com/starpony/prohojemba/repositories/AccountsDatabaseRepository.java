@@ -9,15 +9,19 @@ import java.util.Optional;
 
 
 @Repository
-public class UsersDatabaseRepository {
+public class AccountsDatabaseRepository {
     private final AccountMapper accountMapper;
 
     @Autowired
-    public UsersDatabaseRepository(AccountMapper accountMapper) {
+    public AccountsDatabaseRepository(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
     }
 
     public Optional<Account> getById(int id) {
         return Optional.ofNullable(accountMapper.selectById(id));
+    }
+
+    public Optional<Account> getByEmail(String email) {
+        return Optional.ofNullable(accountMapper.selectByEmail(email));
     }
 }

@@ -2,32 +2,37 @@ package com.starpony.prohojemba.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+public class JWTFilter extends OncePerRequestFilter {
+    private final AuthenticationManager authenticationManager;
 
-public class JWTFilter extends GenericFilterBean {
+    public JWTFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //  Поиск токена в заголовках запроса
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
         String bearerHeader = request.getHeader("Authorization");
         String jwtToken;
 
         if (bearerHeader == null || !bearerHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(servletRequest, servletResponse);
+            filterChain.doFilter(request, response);
             return;
         }
 
         jwtToken = bearerHeader.substring(7);
 
-        SecurityContextHolder.getContext().setAuthentication(new JWTAuthentication(jwtToken, null, null));
+        SecurityContextHolder.getContext().setAuthentication(
+                authenticationManager.authenticate(new AccessTokenAuthentication(jwtToken, null, null, null)));
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(request, response);
     }
 }

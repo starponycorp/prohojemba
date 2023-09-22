@@ -18,7 +18,7 @@ public class JWTUtilsTests {
 
     @Test
     public void extractAccessToken_validToken_returnAccount() {
-        Account account = new Account(3, null, null, false, null, null,
+        Account account = new Account(1, null, null, false, null, null,
                 List.of(
                         new Permission(0, "MANAGE_TITLES", null),
                         new Permission(0, "MANAGE_TYPES", null)
