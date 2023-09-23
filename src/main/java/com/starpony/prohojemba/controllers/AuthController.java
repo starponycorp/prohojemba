@@ -57,6 +57,11 @@ public class AuthController {
         return createTokensPair(account);
     }
 
+    @RequestMapping(value = "/verify", method = RequestMethod.POST)
+    public void requestToVerifyByCode() {
+        
+    }
+
     private TokensPairDto createTokensPair(Account account) {
         String refreshToken = jwtUtils.generateRefreshToken(account);
         refreshTokenRepository.create(refreshToken, account.getId());
