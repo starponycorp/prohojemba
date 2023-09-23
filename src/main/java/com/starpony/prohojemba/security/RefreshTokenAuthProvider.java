@@ -48,6 +48,7 @@ public class RefreshTokenAuthProvider implements AuthenticationProvider {
             throw new DisabledException("Account is locked");
         }
 
+        refreshTokenRepository.delete(refreshToken);
         RefreshTokenAuthentication newAuthentication = new RefreshTokenAuthentication(
                 null, null, account, account.getAuthorities());
         newAuthentication.setAuthenticated(true);
