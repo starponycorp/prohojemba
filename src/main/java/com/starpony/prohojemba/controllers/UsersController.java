@@ -1,6 +1,7 @@
 package com.starpony.prohojemba.controllers;
 
 import com.starpony.prohojemba.converters.UserConverter;
+import com.starpony.prohojemba.dto.AccountEditDto;
 import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.services.AuthService;
 import com.starpony.prohojemba.services.UsersService;
@@ -33,8 +34,8 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/@me", method = RequestMethod.PUT)
-    public UserCurrentDto updateCurrentUser(@RequestBody ProfileEditDto profileEditDto) {
+    public UserCurrentDto updateCurrentUser(@RequestBody AccountEditDto accountEditDto) {
         int currentUserId = 1; // TODO заменить на получение user id из токена
-        return UserConverter.mapToCurrentUserDto(usersService.update(currentUserId, profileEditDto));
+        return UserConverter.mapToCurrentUserDto(usersService.update(currentUserId, accountEditDto));
     }
 }

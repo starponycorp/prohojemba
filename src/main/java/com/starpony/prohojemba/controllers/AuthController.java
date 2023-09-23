@@ -3,6 +3,7 @@ package com.starpony.prohojemba.controllers;
 import com.starpony.prohojemba.dto.LoginDto;
 import com.starpony.prohojemba.dto.RefreshTokenDto;
 import com.starpony.prohojemba.dto.TokensPairDto;
+import com.starpony.prohojemba.dto.VerifyRequestDto;
 import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.repositories.RefreshTokenRepository;
 import com.starpony.prohojemba.security.RefreshTokenAuthentication;
@@ -58,7 +59,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
-    public void requestToVerifyByCode() {
+    public void requestToVerifyByCode(@RequestBody VerifyRequestDto verifyRequestDto) {
         
     }
 

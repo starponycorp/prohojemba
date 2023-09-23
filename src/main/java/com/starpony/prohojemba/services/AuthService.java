@@ -28,10 +28,5 @@ public class AuthService {
         return (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public void authenticateAccount(LoginDto loginDto) {
-    }
 
-    public void refreshTokens() {
-
-    }
 }
