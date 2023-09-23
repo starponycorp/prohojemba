@@ -6,7 +6,7 @@ public class AccountEditDto {
     private String username;
     private String avatar;
 
-    private String password;
+    private String newPassword;
     private String currentPassword;
     private String verificationCode;
 
@@ -34,12 +34,12 @@ public class AccountEditDto {
         this.avatar = avatar;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     public String getCurrentPassword() {

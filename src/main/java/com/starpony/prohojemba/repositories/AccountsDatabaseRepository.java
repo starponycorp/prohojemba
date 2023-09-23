@@ -24,4 +24,8 @@ public class AccountsDatabaseRepository {
     public Optional<Account> getByEmail(String email) {
         return Optional.ofNullable(accountMapper.selectByEmail(email));
     }
+
+    public void update(Account account) {
+        accountMapper.update(account);
+    }
 }
