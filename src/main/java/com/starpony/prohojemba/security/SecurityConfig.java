@@ -61,6 +61,7 @@ public class SecurityConfig {
                 csrf(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(auth -> auth.
                         requestMatchers("/auth/**").permitAll().
+                                requestMatchers("/error").permitAll().
                         requestMatchers(HttpMethod.POST, "/titles").hasAuthority(Permission.MANAGE_TITLES.name()).
                         requestMatchers(HttpMethod.PUT, "/titles/*").hasAuthority(Permission.MANAGE_TITLES.name()).
                         requestMatchers(HttpMethod.DELETE, "/titles/*").hasAuthority(Permission.MANAGE_TITLES.name()).
