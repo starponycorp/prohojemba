@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.security;
 
-import com.starpony.prohojemba.enums.Permissions;
+import com.starpony.prohojemba.enums.Permission;
 import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
 
 import org.springframework.context.annotation.Bean;
@@ -61,12 +61,13 @@ public class SecurityConfig {
                 csrf(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(auth -> auth.
                         requestMatchers("/auth/**").permitAll().
-                        requestMatchers(HttpMethod.POST, "/titles").hasAuthority(Permissions.MANAGE_TITLES.name()).
-                        requestMatchers(HttpMethod.PUT, "/titles/*").hasAuthority(Permissions.MANAGE_TITLES.name()).
-                        requestMatchers(HttpMethod.DELETE, "/titles/*").hasAuthority(Permissions.MANAGE_TITLES.name()).
-                        requestMatchers(HttpMethod.POST, "/types").hasAuthority(Permissions.MANAGE_TYPES.name()).
-                        requestMatchers(HttpMethod.PUT, "/types/*").hasAuthority(Permissions.MANAGE_TYPES.name()).
-                        requestMatchers(HttpMethod.DELETE, "types/*").hasAuthority(Permissions.MANAGE_TYPES.name()).
+                                requestMatchers("/error").permitAll().
+                        requestMatchers(HttpMethod.POST, "/titles").hasAuthority(Permission.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.PUT, "/titles/*").hasAuthority(Permission.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.DELETE, "/titles/*").hasAuthority(Permission.MANAGE_TITLES.name()).
+                        requestMatchers(HttpMethod.POST, "/types").hasAuthority(Permission.MANAGE_TYPES.name()).
+                        requestMatchers(HttpMethod.PUT, "/types/*").hasAuthority(Permission.MANAGE_TYPES.name()).
+                        requestMatchers(HttpMethod.DELETE, "types/*").hasAuthority(Permission.MANAGE_TYPES.name()).
                         anyRequest().authenticated()
                         ).
                 addFilterAt(
