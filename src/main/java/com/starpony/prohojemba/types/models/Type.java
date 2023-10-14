@@ -1,6 +1,4 @@
-package com.starpony.prohojemba.models;
-
-import jakarta.validation.constraints.NotBlank;
+package com.starpony.prohojemba.types.models;
 
 import java.util.Objects;
 

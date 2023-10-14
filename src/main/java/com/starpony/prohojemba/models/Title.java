@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.models;
 
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.models.Type;
 
 import java.util.Objects;
 

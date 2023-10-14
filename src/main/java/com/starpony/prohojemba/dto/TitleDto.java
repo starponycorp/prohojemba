@@ -1,7 +1,5 @@
 package com.starpony.prohojemba.dto;
 
-import com.starpony.prohojemba.dto.TypeDto;
-
 
 public class TitleDto {
     private int id;

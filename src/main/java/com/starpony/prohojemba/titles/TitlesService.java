@@ -1,4 +1,4 @@
-package com.starpony.prohojemba.services;
+package com.starpony.prohojemba.titles;
 
 import com.starpony.prohojemba.dto.TitleEditDto;
 import com.starpony.prohojemba.enums.TitleProgress;
@@ -6,9 +6,9 @@ import com.starpony.prohojemba.exceptions.ItemFormException;
 import com.starpony.prohojemba.exceptions.ItemNotFoundException;
 import com.starpony.prohojemba.filters.TitlesFilter;
 import com.starpony.prohojemba.models.Title;
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.models.Type;
 import com.starpony.prohojemba.repositories.TitlesRepository;
-import com.starpony.prohojemba.repositories.TypesDatabaseRepository;
+import com.starpony.prohojemba.types.repositories.TypesDatabaseRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;

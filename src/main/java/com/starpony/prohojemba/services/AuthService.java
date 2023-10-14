@@ -4,10 +4,8 @@ import com.starpony.prohojemba.dto.TokensPairDto;
 import com.starpony.prohojemba.dto.VerifyRequestDto;
 import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.repositories.RefreshTokenRepository;
-import com.starpony.prohojemba.repositories.VerifyCodesRepository;
 import com.starpony.prohojemba.utils.JWTUtils;
-import com.starpony.prohojemba.utils.VerifyCodeEmailSender;
-import com.starpony.prohojemba.utils.VerifyCodeUtils;
+import com.starpony.prohojemba.verification.utils.VerificationCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,6 @@ public class AuthService {
         this.verifyCodeEmailSender = verifyCodeEmailSender;
     }
 
-
     public Account getAuthenticatedAccount() {
         return (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
@@ -41,7 +38,7 @@ public class AuthService {
     }
 
     public void sendVerificationCode(VerifyRequestDto verifyRequestDto) {
-        String code = VerifyCodeUtils.generate();
+        String code = VerificationCodeGenerator.generate();
         verifyCodesRepository.create(verifyRequestDto.getVerifyType(), verifyRequestDto.getEmail(), code);
 
         verifyCodeEmailSender.send(verifyRequestDto.getEmail(), verifyRequestDto.getVerifyType(), code);

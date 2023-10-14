@@ -2,7 +2,7 @@ package com.starpony.prohojemba.mappers;
 
 import com.starpony.prohojemba.filters.TitlesFilter;
 import com.starpony.prohojemba.models.Title;
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.models.Type;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
-import java.util.Collections;
 import java.util.List;
 
 

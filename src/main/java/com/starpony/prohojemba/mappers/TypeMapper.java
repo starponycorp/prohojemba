@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.mappers;
 
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.models.Type;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

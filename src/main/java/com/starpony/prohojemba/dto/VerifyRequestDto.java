@@ -1,7 +1,5 @@
 package com.starpony.prohojemba.dto;
 
-import com.starpony.prohojemba.enums.VerifyType;
-
 public class VerifyRequestDto {
     private String email;
     private VerifyType verifyType;

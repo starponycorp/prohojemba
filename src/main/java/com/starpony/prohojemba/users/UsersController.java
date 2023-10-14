@@ -1,12 +1,11 @@
-package com.starpony.prohojemba.controllers;
+package com.starpony.prohojemba.users;
 
 import com.starpony.prohojemba.converters.UserConverter;
 import com.starpony.prohojemba.dto.AccountEditDto;
 import com.starpony.prohojemba.models.Account;
 import com.starpony.prohojemba.services.AuthService;
-import com.starpony.prohojemba.services.UsersService;
+import com.starpony.prohojemba.users.UsersService;
 import com.starpony.prohojemba.dto.UserCurrentDto;
-import com.starpony.prohojemba.dto.ProfileEditDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

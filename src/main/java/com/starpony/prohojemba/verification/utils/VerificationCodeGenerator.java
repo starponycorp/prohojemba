@@ -1,9 +1,9 @@
-package com.starpony.prohojemba.utils;
+package com.starpony.prohojemba.verification.utils;
 
 import java.util.Random;
 
 
-public class VerifyCodeUtils {
+public class VerificationCodeGenerator {
     private static int length = 6;
     private static String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
 

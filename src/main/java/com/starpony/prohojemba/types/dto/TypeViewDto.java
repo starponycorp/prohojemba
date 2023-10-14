@@ -1,9 +1,14 @@
-package com.starpony.prohojemba.dto;
+package com.starpony.prohojemba.types.dto;
 
 
-public class TypeDto {
+public class TypeViewDto {
     private int id;
     private String viewName;
+
+    public TypeViewDto(int id, String viewName) {
+        this.id = id;
+        this.viewName = viewName;
+    }
 
     public int getId() {
         return id;

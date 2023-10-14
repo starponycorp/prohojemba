@@ -1,8 +1,9 @@
-package com.starpony.prohojemba.repositories;
+package com.starpony.prohojemba.types.repositories;
 
 import com.starpony.prohojemba.exceptions.ItemAlreadyExistsException;
 import com.starpony.prohojemba.mappers.TypeMapper;
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.exceptions.TypeAlreadyExistException;
+import com.starpony.prohojemba.types.models.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,23 +32,22 @@ public class TypesDatabaseRepository {
         return Optional.ofNullable(typeMapper.selectByViewName(viewName));
     }
 
-    public void create(Type type) {
-        getByViewName(type.getViewName()).ifPresent(typeForUniqueCheck -> {
-            throw new ItemAlreadyExistsException(
+    public void create(Type type) throws TypeAlreadyExistException{
+        Optional<Type> alreadyExistedType = getByViewName(type.getViewName());
+        if (alreadyExistedType.isPresent())
+            throw new TypeAlreadyExistException(
                     String.format("Type with viewName=%s already exists", type.getViewName())
             );
-        });
 
         typeMapper.create(type);
     }
 
-    public void update(Type type) {
-        getByViewName(type.getViewName()).ifPresent(typeForUniqueCheck -> {
-            if (typeForUniqueCheck.getId() != type.getId())
-                throw new ItemAlreadyExistsException(
-                        String.format("Type with viewName=%s already exists", type.getViewName())
-                );
-        });
+    public void update(Type type) throws TypeAlreadyExistException{
+        Optional<Type> alreadyExistedType = getByViewName(type.getViewName());
+        if (alreadyExistedType.isPresent() && alreadyExistedType.get().getId() == type.getId())
+            throw new TypeAlreadyExistException(
+                    String.format("Type with viewName=%s already exists", type.getViewName())
+            );
 
         typeMapper.update(type);
     }

@@ -1,6 +1,6 @@
 package com.starpony.prohojemba.mappers;
 
-import com.starpony.prohojemba.models.Type;
+import com.starpony.prohojemba.types.models.Type;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

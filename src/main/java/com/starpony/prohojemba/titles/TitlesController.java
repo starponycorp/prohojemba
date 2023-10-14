@@ -1,4 +1,4 @@
-package com.starpony.prohojemba.controllers;
+package com.starpony.prohojemba.titles;
 
 import com.starpony.prohojemba.converters.TitleConverter;
 import com.starpony.prohojemba.dto.TitleEditDto;
@@ -7,7 +7,7 @@ import com.starpony.prohojemba.dto.TitleListDto;
 import com.starpony.prohojemba.enums.TitleProgress;
 import com.starpony.prohojemba.filters.TitlesFilter;
 import com.starpony.prohojemba.models.Account;
-import com.starpony.prohojemba.services.TitlesService;
+import com.starpony.prohojemba.titles.TitlesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
