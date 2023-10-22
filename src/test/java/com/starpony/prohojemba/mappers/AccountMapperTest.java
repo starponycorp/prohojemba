@@ -1,7 +1,8 @@
 package com.starpony.prohojemba.mappers;
 
-import com.starpony.prohojemba.models.Account;
-import com.starpony.prohojemba.models.Permission;
+import com.starpony.prohojemba.accounts.models.Account;
+import com.starpony.prohojemba.accounts.repositories.mappers.AccountMapper;
+import com.starpony.prohojemba.permissions.models.Permission;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

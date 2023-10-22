@@ -1,7 +1,8 @@
 package com.starpony.prohojemba.utils;
 
-import com.starpony.prohojemba.models.Account;
-import com.starpony.prohojemba.models.Permission;
+import com.starpony.prohojemba.accounts.models.Account;
+import com.starpony.prohojemba.permissions.models.Permission;
+import com.starpony.prohojemba.security.jwt.JWTUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

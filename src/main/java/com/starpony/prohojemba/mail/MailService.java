@@ -4,13 +4,17 @@ import com.starpony.prohojemba.mail.dto.MailMessageDto;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Properties;
 
 
 @Service
+@Validated
 public class MailService {
     private final Session session;
     private final String from;
@@ -41,7 +45,7 @@ public class MailService {
         session = Session.getInstance(properties, authenticator);
     }
 
-    public void send(MailMessageDto mailMessageDto) {
+    public void send(@Valid MailMessageDto mailMessageDto) throws ValidationException {
         try {
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress(from));

@@ -1,18 +1,14 @@
 package com.starpony.prohojemba.titles;
 
-import com.starpony.prohojemba.converters.TitleConverter;
-import com.starpony.prohojemba.dto.TitleEditDto;
-import com.starpony.prohojemba.dto.TitleDto;
-import com.starpony.prohojemba.dto.TitleListDto;
-import com.starpony.prohojemba.enums.TitleProgress;
-import com.starpony.prohojemba.filters.TitlesFilter;
-import com.starpony.prohojemba.models.Account;
-import com.starpony.prohojemba.titles.TitlesService;
+import com.starpony.prohojemba.accounts.models.Account;
 
+import com.starpony.prohojemba.titles.dto.TitleListViewDto;
+import com.starpony.prohojemba.titles.models.Title;
+import com.starpony.prohojemba.titles.repositories.filters.TitlesListFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
 
 @RestController
@@ -26,24 +22,14 @@ public class TitlesController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public TitleListDto getTitles(
+    public TitleListViewDto getTitles(
             @RequestParam int limit,
             @RequestParam int offset,
             @RequestParam int type,
             @RequestParam String search
     ) {
-        TitlesFilter titlesFilter = new TitlesFilter();
-        titlesFilter.setType(type);
-        titlesFilter.setNameSearch(search);
-
-        Account account = new Account();
-        account.setId(1);
-
-        TitleListDto titleListDto = new TitleListDto();
-        titleListDto.setItems(titlesService.getAll(titlesFilter, limit, offset, account.getId())
-                .stream().map(TitleConverter::mapTo).collect(Collectors.toList()));
-
-        return titleListDto;
+        TitlesListFilter filter = new TitlesListFilter(type, search, limit, offset);
+        List<Title> titles = titlesService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

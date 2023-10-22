@@ -1,18 +1,14 @@
 package com.starpony.prohojemba.titles;
 
-import com.starpony.prohojemba.dto.TitleEditDto;
+import com.starpony.prohojemba.titles.dto.TitleEditDto;
 import com.starpony.prohojemba.enums.TitleProgress;
-import com.starpony.prohojemba.exceptions.ItemFormException;
-import com.starpony.prohojemba.exceptions.ItemNotFoundException;
-import com.starpony.prohojemba.filters.TitlesFilter;
-import com.starpony.prohojemba.models.Title;
+import com.starpony.prohojemba.titles.models.Title;
+import com.starpony.prohojemba.titles.repositories.filters.TitlesListFilter;
 import com.starpony.prohojemba.types.models.Type;
-import com.starpony.prohojemba.repositories.TitlesRepository;
+import com.starpony.prohojemba.titles.repositories.TitlesRepository;
 import com.starpony.prohojemba.types.repositories.TypesDatabaseRepository;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -32,11 +28,8 @@ public class TitlesService {
         this.typesRepository = typesRepository;
     }
 
-    public List<Title> getAll(@Valid TitlesFilter titlesFilter,
-                              @Min(value = 5, message = "Limit min value is 5") @Max(value = 100, message = "Limit max value is 100") int limit,
-                              @Min(value = 0, message = "Offset cannot be less than 0") int offset,
-                              int userId) {
-        return titlesRepository.getAll(titlesFilter, limit, offset, userId);
+    public List<Title> getAll(@Valid TitlesListFilter titlesFilter) {
+        return titlesRepository.getAll(titlesFilter);
     }
 
     public Title getOne(int titleId, int userId) {

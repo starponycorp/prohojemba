@@ -1,8 +1,11 @@
 package com.starpony.prohojemba.security;
 
 import com.starpony.prohojemba.enums.Permission;
-import com.starpony.prohojemba.repositories.AccountsDatabaseRepository;
+import com.starpony.prohojemba.accounts.repositories.AccountsDatabaseRepository;
 
+import com.starpony.prohojemba.security.jwt.JWTFilter;
+import com.starpony.prohojemba.security.token.access.AccessTokenAuthProvider;
+import com.starpony.prohojemba.security.token.refresh.RefreshTokenAuthProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

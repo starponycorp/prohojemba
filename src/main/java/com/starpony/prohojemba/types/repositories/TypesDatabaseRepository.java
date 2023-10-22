@@ -1,7 +1,6 @@
 package com.starpony.prohojemba.types.repositories;
 
-import com.starpony.prohojemba.exceptions.ItemAlreadyExistsException;
-import com.starpony.prohojemba.mappers.TypeMapper;
+import com.starpony.prohojemba.types.repositories.mappers.TypeMapper;
 import com.starpony.prohojemba.types.exceptions.TypeAlreadyExistException;
 import com.starpony.prohojemba.types.models.Type;
 import org.springframework.beans.factory.annotation.Autowired;
